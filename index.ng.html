@@ -1,0 +1,15 @@
+<meteor-include src="loginButtons"></meteor-include>
+
+<div ng-controller="ItemsListCtrl">
+  <ul>
+    <li ng-repeat="item in items">
+      <input ng-model="item.is_done" type="checkbox" />
+      <span>{{item.title}}</span>
+    </li>
+  </ul>
+  <form>
+    <label>title</label>
+    <input ng-model="newItem.title" />
+    <button ng-click="items.save(newItem); newItem='';">Add</button>
+  </form>
+</div>
