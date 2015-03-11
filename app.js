@@ -13,7 +13,6 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    debugger
     if (Items.find().count() === 0) {
       var items = [
         {'title': 'Dubstep-Free Zone'},
