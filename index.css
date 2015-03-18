@@ -1,0 +1,28 @@
+.list-container {
+  margin-bottom: 0px;
+}
+
+.list-container .item-button {
+  border: none;
+  background: none;
+}
+
+.list-container .remove-item-button {
+  color: red;
+}
+
+.list-container .insert-item-button {
+  color: #4F8EF7;
+}
+
+.list-container .item-checkbox {
+  height: 110%;
+  font-size: 100%;
+  display: inline-block;
+  padding-left: 0px;
+  margin-right: 10px;
+}
+
+.list-container #new-item-input {
+  direction: auto;
+}
