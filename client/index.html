@@ -7,9 +7,25 @@
     <!-- <h1>
       <a href="/items">My First List</a>
     </h1> -->
-    <div ui-view></div>
+    <!-- <div ui-view></div> -->
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
 
-    <div class="tabs tabs-icon-top">
+    <ion-tabs class="tabs-positive tabs-icon-top">
+
+      <ion-tab title="My Lists" icon-on="ion-ios-list" icon-off="ion-ios-list-outline">
+        <ion-nav-view name="home-tab"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab title="Profile" icon-on="ion-happy" icon-off="ion-happy-outline" ui-sref="login">
+        <ion-nav-view name="profile-tab"></ion-nav-view>
+      </ion-tab>
+
+    </ion-tabs>
+
+    <!-- <div class="tabs tabs-icon-top">
       <a class="tab-item" href="/login">
         <i class="icon ion-happy-outline"></i>
         Login
@@ -18,11 +34,11 @@
         <i class="icon ion-ios-list-outline"></i>
         Lists
       </a>
-      <a class="tab-item" href="/list/1">
+      <a class="tab-item" href="/lists/1">
         <i class="icon ion-ios-cart-outline"></i>
         My List
       </a>
     </div>
-
+ -->
   </div>
 </body>

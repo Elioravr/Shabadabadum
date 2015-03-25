@@ -1,7 +1,7 @@
-angular.module('familyst').controller("ItemsListCtrl", ['$scope', '$meteor', '$rootScope',
-  function($scope, $meteor, $rootScope){
-
-    // $scope.items = $meteor.collection(Items.find({}, {sort: {createdAt: -1}}));
+angular.module('familyst').controller("ItemsListCtrl", ['$scope', '$meteor', '$rootScope', '$stateParams',
+  function($scope, $meteor, $rootScope, $stateParams){
+    $scope.listId = $stateParams.listId;
+    console.log($scope.listId);
     $scope.items = $meteor.collection(Items);
 
     $scope.insert = function () {

@@ -1,6 +1,7 @@
-angular.module("familyst").controller("ListsListCtrl", ['$scope', '$stateParams',
-  function($scope, $stateParams){
+angular.module("familyst").controller("ListsListCtrl", ['$meteor', '$scope', '$stateParams',
+  function($meteor, $scope, $stateParams){
+    $scope.lists = $meteor.collection(Lists)
 
-    $scope.listId = $stateParams.listId;
+    // $scope.list = $stateParams.listId;
 
 }]);

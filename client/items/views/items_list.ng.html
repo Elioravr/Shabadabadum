@@ -1,46 +1,33 @@
-<div class="bar bar-header bar-positive">
-  <!-- <button class="button button-icon icon ion-ios-arrow-back"></button> -->
-  <!-- <meteor-include src="loginButtons"></meteor-include> -->
-  <a class="button button-clear" href="/login">Login</a>
-  <div class="title">My First List</div>
-</div>
-<div class="content has-header">
-  <div ng-controller="ItemsListCtrl">
-    <div class="list list-container">
-      <form>
-        <!-- <div class="list"> -->
-        <label class="item item-input item-button-right">
-          <input id="new-item-input" ng-model="newItem.title" type="text" placeholder="Add New Item">
-          <!-- <button class="button button-positive" ng-click="insert()"> -->
-          <button class="item-button insert-item-button button" ng-click="insert()">
-            <i class="icon ion-ios-plus"></i>
+<ion-view view-title="List">
+  <ion-content ng-controller="ItemsListCtrl">
+    <!-- <div class="bar bar-header bar-positive">
+      <a class="button button-clear" href="/login">Login</a>
+      <div class="title">My First List</div>
+    </div> -->
+    <!-- <div class="content has-header"> -->
+      <!-- <div ng-controller="ItemsListCtrl"> -->
+      <div class="list list-container">
+        <form>
+          <label class="item item-input item-button-right">
+            <input id="new-item-input" ng-model="newItem.title" type="text" placeholder="Add New Item">
+            <button class="item-button insert-item-button button" ng-click="insert()">
+              <i class="icon ion-ios-plus"></i>
+            </button>
+          </label>
+        </form>
+        <div ng-repeat="item in items" class="item item-button-right">
+          <div class="item-checkbox" ng-click="markAsDone(item)">
+            <i class="ion-ios-circle-outline" ng-hide="item.is_done"></i>
+            <i class="ion-ios-checkmark" ng-show="item.is_done"></i>
+            <div class="item-text" ng-class="{done: item.is_done}">{{item.title}}</div>
+          </div>
+          <button class="item-button remove-item-button button" ng-click="remove(item)">
+            <i class="icon ion-ios-close"></i>
           </button>
-          <!-- </button> -->
-        </label>
-        <!-- </div> -->
-        <!-- <div class="padding"> -->
-        <!-- </div> -->
-        <!-- <label>title</label>
-        <input ng-model="newItem.title" />
-        <span class="ion-ios-plus" ng-click="newItem.owner=$root.currentUser._id; items.push(newItem)"></span> -->
-      </form>
-      <div ng-repeat="item in items" class="item item-button-right">
-        <!-- <input ng-model="item.is_done" type="checkbox" /> -->
-        <div class="item-checkbox" ng-click="markAsDone(item)">
-          <i class="ion-ios-circle-outline" ng-hide="item.is_done"></i>
-          <i class="ion-ios-circle-filled" ng-show="item.is_done"></i>
         </div>
-        <!-- <span>{{item.owner}}</span>
-         - -->
-        <span ng-class="{done: item.is_done}">{{item.title}}</span>
-        <!-- <button class="button button-assertive" ng-click="remove(item)"> -->
-        <button class="item-button remove-item-button button" ng-click="remove(item)">
-          <i class="icon ion-ios-close"></i>
-        </button>
-        <!-- </button> -->
-        <!-- <button ng-click="remove(party)">X</button> -->
       </div>
-    </div>
 
-  </div>
-</div>
+    </div>
+    <!-- </div> -->
+  </ion-content>
+</ion-view>

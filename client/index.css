@@ -13,26 +13,48 @@ html, body {
 
 .list-container .done {
   text-decoration: line-through;
-  color: #ccc;
+  color: #ccc !important;
+  margin-left: 10px;
 }
 
 .list-container .remove-item-button {
   color: red;
+  margin-top: 7px;
 }
 
 .list-container .insert-item-button {
   color: #4F8EF7;
 }
 
+.list-container .item-text {
+  display: inline-block;
+  color: black;
+  font-size: 17px;
+  position: absolute;
+  top: 20px;
+  margin-left: 10px;
+  /*line-height: 30px;*/
+  /*width: auto;*/
+}
+
 .list-container .item-checkbox {
   color: #4F8EF7;
   height: 110%;
   /*font-size: 100%;*/
-  font-size: 20px;
+  font-size: 30px;
   display: inline-block;
   padding-left: 0px;
-  margin-right: 10px;
   cursor: pointer;
+}
+
+/*.list-container .special-checkbox {
+  padding: 0px;
+  padding-right: 80px;
+  border: none;
+}*/
+
+.list-container .item-button-right {
+  padding-right: 0px;
 }
 
 .list-container #new-item-input {

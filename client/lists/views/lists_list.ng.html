@@ -1,0 +1,60 @@
+<!-- <div class="bar bar-header bar-positive">
+  <a class="button button-clear" href="/login">Login</a>
+  <div class="title">{{$root.currentUser.id}} Lists</div>
+</div>
+<div class="content has-header">
+  <div ng-controller="ListsListCtrl">
+    <div class="list list-container">
+      <form>
+        <label class="item item-input item-button-right">
+          <input id="new-item-input" ng-model="newItem.title" type="text" placeholder="Add New Item">
+          <button class="item-button insert-item-button button" ng-click="insert()">
+            <i class="icon ion-ios-plus"></i>
+          </button>
+        </label>
+      </form>
+      <div ng-repeat="list in lists" class="item item-button-right">
+        <span>{{list.title}}</span>
+        <button class="item-button button" ng-click="remove(item)">
+          <i class="icon ion-ios-arrow-right"></i>
+        </button>
+      </div>
+      <ion-list>
+        <ion-item ng-repeat="list in lists" href="/lists/1">
+          Hello, {{list.title}}!
+        </ion-item>
+      </ion-list>
+    </div>
+
+  </div>
+</div>
+ -->
+
+<ion-view view-title="My Lists">
+  <ion-content ng-controller="ListsListCtrl">
+    <div class="list list-container">
+      <form>
+        <label class="item item-input item-button-right">
+          <input id="new-item-input" ng-model="newItem.title" type="text" placeholder="Add New Item">
+          <button class="item-button insert-item-button button" ng-click="insert()">
+            <i class="icon ion-ios-plus"></i>
+          </button>
+        </label>
+      </form>
+      <!-- <div ng-repeat="list in lists" class="item item-button-right">
+        <span>{{list.title}}</span>
+        <button class="item-button button" ng-click="remove(item)">
+          <i class="icon ion-ios-arrow-right"></i>
+        </button>
+      </div> -->
+      <ion-list>
+        <ion-item class="item-button-right" ng-repeat="list in lists" ui-sref="list({listId: list._id})">
+          {{list.title}}
+          <button class="item-button button" ng-click="remove(item)">
+            <i class="icon ion-ios-arrow-right"></i>
+          </button>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+</ion-view>
