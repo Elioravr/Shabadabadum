@@ -6,11 +6,28 @@ angular.module("familyst").config(['$urlRouterProvider', '$stateProvider', '$loc
     $stateProvider
       .state('login', {
         url: '/login',
-        templateUrl: 'client/users/views/login_form.ng.html',
         views: {
-          'profile-tab': {
+          'login-tab': {
             templateUrl: "client/users/views/login_form.ng.html",
             controller: 'LoginCtrl'
+          }
+        }
+      })
+      .state('register', {
+        url: '/register',
+        views: {
+          'login-tab': {
+            templateUrl: "client/users/views/register_form.ng.html",
+            controller: 'RegisterCtrl'
+          }
+        }
+      })
+      .state('profile', {
+        url: '/profile',
+        views: {
+          'profile-tab': {
+            templateUrl: "client/users/views/profile.ng.html",
+            controller: 'ProfileCtrl'
           }
         }
       })

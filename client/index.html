@@ -15,11 +15,15 @@
 
     <ion-tabs class="tabs-positive tabs-icon-top">
 
-      <ion-tab title="My Lists" icon-on="ion-ios-list" icon-off="ion-ios-list-outline">
+      <ion-tab title="My Lists" icon-on="ion-ios-list" icon-off="ion-ios-list-outline" ui-sref="lists">
         <ion-nav-view name="home-tab"></ion-nav-view>
       </ion-tab>
 
-      <ion-tab title="Profile" icon-on="ion-happy" icon-off="ion-happy-outline" ui-sref="login">
+      <ion-tab title="Temporary" icon-on="ion-ios-gear" icon-off="ion-ios-gear-outline" ui-sref="login">
+        <ion-nav-view name="login-tab"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab title="Profile" icon-on="ion-happy" icon-off="ion-happy-outline" ui-sref="profile">
         <ion-nav-view name="profile-tab"></ion-nav-view>
       </ion-tab>
 
