@@ -35,7 +35,7 @@
     <div class="list list-container">
       <form>
         <label class="item item-input item-button-right">
-          <input id="new-item-input" ng-model="newItem.title" type="text" placeholder="Add New Item">
+          <input id="new-item-input" ng-model="newList.name" type="text" placeholder="Add New Item">
           <button class="item-button insert-item-button button" ng-click="insert()">
             <i class="icon ion-ios-plus"></i>
           </button>
@@ -47,10 +47,14 @@
           <i class="icon ion-ios-arrow-right"></i>
         </button>
       </div> -->
-      <ion-list>
-        <ion-item class="item-button-right" ng-repeat="list in lists" ui-sref="list({listId: list._id})">
-          {{list.title}}
-          <button class="item-button button" ng-click="remove(item)">
+      <ion-toggle ng-model="shouldShowDelete">
+        Show Delete?
+      </ion-toggle>
+      <ion-list show-delete="shouldShowDelete">
+        <ion-item class="item-button-right" ng-repeat="list in lists" ui-sref="list({listId: list._id.toString()})">
+          <ion-delete-button class="ion-minus-circled" ng-click="remove(list); $event.stopPropagation();"></ion-delete-button>
+          {{list.name}}
+        <button class="item-button button" ng-click="remove(item)">
             <i class="icon ion-ios-arrow-right"></i>
           </button>
         </ion-item>
