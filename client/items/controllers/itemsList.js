@@ -4,7 +4,12 @@ angular.module('familyst').controller("ItemsListCtrl", ['$scope', '$meteor', '$r
     // $scope.listId = $stateParams.listId;
     $scope.list = $meteor.object(Lists, $stateParams.listId);
     $scope.items = $meteor.collection(Items);
-    // $scope.items
+
+    $scope.sortItems = function () {
+      $scope.items.sort(function(a,b){
+        return (new Date(a.createdAt) - new Date(b.createdAt)) * (-1);
+      });
+    }
 
     $scope.insert = function () {
       // $scope.newItem.owner = $rootScope.currentUser._id;
@@ -20,6 +25,7 @@ angular.module('familyst').controller("ItemsListCtrl", ['$scope', '$meteor', '$r
       $scope.items.save($scope.newItem).then(
         function () {
           $scope.newItem.title = "";
+          $scope.sortItems();
         },
         function () {
           console.log(arguments);
@@ -39,4 +45,6 @@ angular.module('familyst').controller("ItemsListCtrl", ['$scope', '$meteor', '$r
         }
       );
     };
+
+    $scope.sortItems();
  }]);
