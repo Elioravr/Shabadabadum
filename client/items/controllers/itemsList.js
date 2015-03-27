@@ -1,15 +1,28 @@
 angular.module('familyst').controller("ItemsListCtrl", ['$scope', '$meteor', '$rootScope', '$stateParams',
   function($scope, $meteor, $rootScope, $stateParams){
-    $scope.listId = $stateParams.listId;
-    console.log($scope.listId);
+    // debugger
+    // $scope.listId = $stateParams.listId;
+    $scope.list = $meteor.object(Lists, $stateParams.listId);
     $scope.items = $meteor.collection(Items);
+    // $scope.items
 
     $scope.insert = function () {
-      $scope.newItem.owner = $rootScope.currentUser._id;
+      // $scope.newItem.owner = $rootScope.currentUser._id;
       $scope.newItem.createdAt = new Date();
+      $scope.newItem.is_done = false;
+      // $scope.list.items.push($scope.newItem);
+      var list = {
+        _id: $scope.list._id,
+        name: $scope.list.name,
+        createdAt: $scope.list.createdAt
+      }
+      $scope.newItem.list = list;
       $scope.items.save($scope.newItem).then(
         function () {
           $scope.newItem.title = "";
+        },
+        function () {
+          console.log(arguments);
         }
       );
     };

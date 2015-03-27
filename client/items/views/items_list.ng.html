@@ -1,5 +1,5 @@
-<ion-view view-title="List">
-  <ion-content ng-controller="ItemsListCtrl">
+<ion-view ng-controller="ItemsListCtrl" view-title="{{list.name}}">
+  <ion-content>
     <!-- <div class="bar bar-header bar-positive">
       <a class="button button-clear" href="/login">Login</a>
       <div class="title">My First List</div>
@@ -9,13 +9,16 @@
       <div class="list list-container">
         <form>
           <label class="item item-input item-button-right">
-            <input id="new-item-input" ng-model="newItem.title" type="text" placeholder="Add New Item">
+            <input id="new-item-input" ng-model="$parent.newItem.title" type="text" placeholder="Add New Item">
             <button class="item-button insert-item-button button" ng-click="insert()">
               <i class="icon ion-ios-plus"></i>
             </button>
           </label>
         </form>
-        <div ng-repeat="item in items" class="item item-button-right">
+        <ion-toggle ng-model="shouldHideCompleted">
+          Hide Completed?
+        </ion-toggle>
+        <div ng-repeat="item in items" class="item item-button-right" ng-hide="shouldHideCompleted && item.is_done">
           <div class="item-checkbox" ng-click="markAsDone(item)">
             <i class="ion-ios-circle-outline" ng-hide="item.is_done"></i>
             <i class="ion-ios-checkmark" ng-show="item.is_done"></i>
@@ -26,7 +29,6 @@
           </button>
         </div>
       </div>
-
     </div>
     <!-- </div> -->
   </ion-content>
