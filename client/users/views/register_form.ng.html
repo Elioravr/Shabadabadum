@@ -1,0 +1,41 @@
+<ion-view title="Join Familyst">
+  <ion-content>
+    <div class="padding">
+      <div class="list list-inset">
+        <label class="item item-input">
+          <i class="icon ion-android-mail placeholder-icon"></i>
+          <input type="email" placeholder="Email address" ng-model="$parent.emailAddress"/>
+        </label>
+        <label class="item item-input">
+          <i class="icon ion-unlocked placeholder-icon"></i>
+          <input type="password" placeholder="Password" ng-model="$parent.password"/>
+        </label>
+        <label class="item item-input">
+          <i class="icon ion-refresh placeholder-icon"></i>
+          <input type="password" placeholder="Password again" ng-model="$parent.passwordConfirmation"/>
+        </label>
+        <label class="item item-input">
+          <i class="icon ion-happy-outline placeholder-icon"></i>
+          <input type="text" placeholder="First name" ng-model="$parent.firstName"/>
+        </label>
+        <label class="item item-input">
+          <i class="icon ion-person placeholder-icon"></i>
+          <input type="text" placeholder="Last name" ng-model="$parent.lastName"/>
+        </label>
+      </div>
+
+      <div>
+        <button class="button button-block button-balanced" ng-click="login()">
+          Create user
+        </button>
+        <!-- <button class="button button-block button-balanced" ng-click="goToLogin()">
+          I already have a user
+        </button> -->
+      </div>
+      <!-- <div>
+        <a ui-sref="main.forgotPassword">Forgot password?</a>
+      </div> -->
+    </div>
+  </ion-content>
+  <!-- <ion-footer-bar align-title="left" class="bar-balanced"></ion-footer-bar> -->
+</ion-view>
