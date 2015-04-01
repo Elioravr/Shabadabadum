@@ -1,37 +1,66 @@
-angular.module('familyst').controller('RegisterCtrl', ['$scope', '$rootScope', '$state', '$ionicPopup', function($scope, $rootScope, $state, $ionicPopup) {
-  $scope.goToLogin = function() {
-    $state.go('login');
-  };
+angular
+  .module('familyst')
+  .controller('RegisterCtrl', RegisterCtrl);
 
-  $scope.register = function () {
-    if ($scope.password === $scope.passwordConfirmation) {
-      Accounts.createUser({
-        email: $scope.emailAddress,
-        password: $scope.password,
-        profile: {
-            firstName: $scope.firstName,
-            lastName: $scope.lastName
-        }
-      }, function () {
-        $state.go("lists");
+RegisterCtrl = ['$scope', '$rootScope', '$state', '$ionicPopup', '$ionicHistory', '$location'];
+
+function RegisterCtrl ($scope, $rootScope, $state, $ionicPopup, $ionicHistory, $location) {
+
+  // Functions declartion
+  $scope.register = register;
+  $scope.serializeUser = serializeUser;
+  $scope.goToHome = goToHome;
+  $scope.alertPasswordsError = alertPasswordsError;
+  $scope.clearForm = clearForm;
+  $scope.confirmPasswords = confirmPasswords;
+
+  function register () {
+    if ($scope.confirmPasswords()) {
+      var user = $scope.serializeUser();
+      Accounts.createUser(user, function () {
+        $scope.clearForm();
+        $scope.goToHome();
       });
     } else {
-      $ionicPopup.alert({
-        title : 'Oops, Something went wrong',
-        template : 'Your passwords doesn\'t match.'
-      });
+      $scope.alertPasswordsError();
     }
   }
 
-  // $scope.login = function() {
-  //   Meteor.loginWithPassword($scope.emailAddress.toLowerCase(), $scope.password, function(err) {
-  //     if (err)
-  //       $ionicPopup.alert({
-  //         title : 'Error Occurred',
-  //         template : 'Error occurred while logging in.'
-  //       });
-  //     else
-  //       $state.go('lists');
-  //   });
-  // }
-}]);
+  function serializeUser () {
+    return {
+      email: $scope.emailAddress,
+      password: $scope.password,
+      profile: {
+          firstName: $scope.firstName,
+          lastName: $scope.lastName
+      }
+    }
+  }
+
+  function goToHome () {
+    $ionicHistory.nextViewOptions({
+      disableAnimate: true,
+      disableBack: true
+    });
+    $location.path("/lists");
+  }
+
+  function alertPasswordsError () {
+    $ionicPopup.alert({
+      title : 'Oops, Something went wrong',
+      template : 'Your passwords doesn\'t match.'
+    });
+  }
+
+  function clearForm () {
+    $scope.emailAddress = '';
+    $scope.password = '';
+    $scope.passwordConfirmation = '';
+    $scope.firstName = '';
+    $scope.lastName = '';
+  }
+
+  function confirmPasswords () {
+    return $scope.password === $scope.passwordConfirmation
+  }
+}

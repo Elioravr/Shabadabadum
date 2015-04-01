@@ -1,13 +1,12 @@
-angular.module("familyst").controller("ListsListCtrl", ['$meteor', '$scope', '$rootScope', '$stateParams', '$ionicPopup',
-  function($meteor, $scope, $rootScope, $stateParams, $ionicPopup){
-    $scope.lists = $meteor.collection(Lists)
+angular.module("familyst").controller("ListsListCtrl", ['$meteor', '$scope', '$rootScope', '$stateParams', '$ionicPopup', '$ionicHistory', '$location', '$state',
+  function($meteor, $scope, $rootScope, $stateParams, $ionicPopup, $ionicHistory, $location, $state){
+    if($rootScope.currentUser === "undefined" || $rootScope.currentUser === null) {
+        $state.go("login");
+    }
 
-    // $scope.list = $stateParams.listId;
-    $scope.lists = $meteor.collection(Lists);
+    $scope.lists = $meteor.collection(Lists).subscribe('Lists');
 
     $scope.insert = function () {
-      // $scope.newList.owner = $rootScope.currentUser._id;
-      $scope.newList.createdAt = new Date();
       $scope.lists.save($scope.newList).then(
         function () {
           $scope.newList.name = "";

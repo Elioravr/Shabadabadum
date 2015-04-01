@@ -1,50 +1,36 @@
-angular.module('familyst').controller("ItemsListCtrl", ['$scope', '$meteor', '$rootScope', '$stateParams',
-  function($scope, $meteor, $rootScope, $stateParams){
-    // debugger
-    // $scope.listId = $stateParams.listId;
-    $scope.list = $meteor.object(Lists, $stateParams.listId);
-    $scope.items = $meteor.collection(Items);
+angular
+  .module('familyst')
+  .controller('ItemsListCtrl', ItemsListCtrl);
 
-    $scope.sortItems = function () {
-      $scope.items.sort(function(a,b){
-        return (new Date(a.createdAt) - new Date(b.createdAt)) * (-1);
-      });
-    }
+ItemsListCtrl.$inject = ['$scope', '$meteor', '$rootScope', '$stateParams'];
 
-    $scope.insert = function () {
-      // $scope.newItem.owner = $rootScope.currentUser._id;
-      $scope.newItem.createdAt = new Date();
-      $scope.newItem.is_done = false;
-      // $scope.list.items.push($scope.newItem);
-      var list = {
-        _id: $scope.list._id,
-        name: $scope.list.name,
-        createdAt: $scope.list.createdAt
+function ItemsListCtrl ($scope, $meteor, $rootScope, $stateParams) {
+  $scope.list = $meteor.object(Lists, $stateParams.listId, false);
+
+  // Functions declartion
+  $scope.insert = insert;
+  $scope.markAsDone = markAsDone;
+  $scope.remove = remove;
+
+  function insert () {
+    $scope.newItem.isDone = false;
+    $scope.list.items.push($scope.newItem);
+    $scope.list.save().then(
+      function () {
+        $scope.newItem.title = '';
+      },
+      function () {
+        console.log(arguments);
       }
-      $scope.newItem.list = list;
-      $scope.items.save($scope.newItem).then(
-        function () {
-          $scope.newItem.title = "";
-          $scope.sortItems();
-        },
-        function () {
-          console.log(arguments);
-        }
-      );
-    };
+    );
+  }
 
-    $scope.markAsDone = function (item) {
-      item.is_done = !item.is_done;
-    };
+  function markAsDone (item) {
+    item.isDone = !item.isDone;
+  }
 
-    $scope.remove = function (item) {
-      $scope.items.remove(item).then (
-        function() {}, // success
-        function (error) { // error
-          console.log(error.reason);
-        }
-      );
-    };
-
-    $scope.sortItems();
- }]);
+  function remove (item) {
+    var index = $scope.list.items.indexOf(item);
+    $scope.list.items.splice(index, 1);
+  }
+}

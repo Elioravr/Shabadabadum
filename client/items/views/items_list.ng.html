@@ -1,35 +1,27 @@
-<ion-view ng-controller="ItemsListCtrl" view-title="{{list.name}}">
+<ion-view view-title="{{list.name}}">
   <ion-content>
-    <!-- <div class="bar bar-header bar-positive">
-      <a class="button button-clear" href="/login">Login</a>
-      <div class="title">My First List</div>
-    </div> -->
-    <!-- <div class="content has-header"> -->
-      <!-- <div ng-controller="ItemsListCtrl"> -->
-      <div class="list list-container">
-        <form>
-          <label class="item item-input item-button-right">
-            <input id="new-item-input" ng-model="$parent.newItem.title" type="text" placeholder="Add New Item">
-            <button class="item-button insert-item-button button" ng-click="insert()">
-              <i class="icon ion-ios-plus"></i>
-            </button>
-          </label>
-        </form>
-        <ion-toggle ng-model="shouldHideCompleted">
-          Hide Completed?
-        </ion-toggle>
-        <div ng-repeat="item in items" class="item item-button-right" ng-hide="shouldHideCompleted && item.is_done">
-          <div class="item-checkbox" ng-click="markAsDone(item)">
-            <i class="ion-ios-circle-outline" ng-hide="item.is_done"></i>
-            <i class="ion-ios-checkmark" ng-show="item.is_done"></i>
-            <div class="item-text" ng-class="{done: item.is_done}">{{item.title}}</div>
-          </div>
-          <button class="item-button remove-item-button button" ng-click="remove(item)">
-            <i class="icon ion-ios-close"></i>
+    <div class="list list-container">
+      <form>
+        <label class="item item-input item-button-right">
+          <input id="new-item-input" ng-model="$parent.newItem.title" type="text" placeholder="Add New Item">
+          <button class="item-button insert-item-button button" ng-click="insert()">
+            <i class="icon ion-ios-plus"></i>
           </button>
+        </label>
+      </form>
+      <ion-toggle ng-model="shouldHideCompleted">
+        Hide Completed?
+      </ion-toggle>
+      <div ng-repeat="item in list.items" class="item item-button-right" ng-hide="shouldHideCompleted && item.isDone">
+        <div class="item-checkbox" ng-click="markAsDone(item)">
+          <i class="ion-ios-circle-outline" ng-hide="item.isDone"></i>
+          <i class="ion-ios-checkmark" ng-show="item.isDone"></i>
+          <div class="item-text" ng-class="{done: item.isDone}">{{item.title}}</div>
         </div>
+        <button class="item-button remove-item-button button" ng-click="remove(item)">
+          <i class="icon ion-ios-close"></i>
+        </button>
       </div>
     </div>
-    <!-- </div> -->
   </ion-content>
 </ion-view>

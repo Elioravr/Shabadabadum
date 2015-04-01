@@ -1,0 +1,13 @@
+<ion-view>
+  <ion-tabs class="tabs-positive tabs-icon-top" ng-show="$root.currentUser">
+
+    <ion-tab title="My Lists" icon-on="ion-ios-list" icon-off="ion-ios-list-outline" ui-sref="home.lists">
+      <ion-nav-view name="home-tab"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab title="Profile" icon-on="ion-happy" icon-off="ion-happy-outline" ui-sref="home.profile">
+      <ion-nav-view name="profile-tab"></ion-nav-view>
+    </ion-tab>
+
+  </ion-tabs>
+</ion-view>

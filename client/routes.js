@@ -13,27 +13,23 @@ angular.module("familyst").config(['$urlRouterProvider', '$stateProvider', '$loc
 
     $locationProvider.html5Mode(true);
 
-
     $stateProvider
       .state('login', {
         url: '/login',
-        views: {
-          'login-tab': {
-            templateUrl: "client/users/views/login_form.ng.html",
-            controller: 'LoginCtrl'
-          }
-        }
+        templateUrl: "client/users/views/login_form.ng.html",
+        controller: 'LoginCtrl'
       })
       .state('register', {
         url: '/register',
-        views: {
-          'login-tab': {
-            templateUrl: "client/users/views/register_form.ng.html",
-            controller: 'RegisterCtrl'
-          }
-        }
+        templateUrl: "client/users/views/register_form.ng.html",
+        controller: 'RegisterCtrl'
       })
-      .state('profile', {
+      .state('home', {
+        url: '/home',
+        abstract: true,
+        templateUrl: "client/users/views/home.ng.html"
+      })
+      .state('home.profile', {
         url: '/profile',
         views: {
           'profile-tab': {
@@ -42,7 +38,7 @@ angular.module("familyst").config(['$urlRouterProvider', '$stateProvider', '$loc
           }
         }
       })
-      .state('lists', {
+      .state('home.lists', {
         url: '/lists',
         views: {
           'home-tab': {
@@ -50,13 +46,8 @@ angular.module("familyst").config(['$urlRouterProvider', '$stateProvider', '$loc
             controller: 'ListsListCtrl'
           }
         }
-        // resolve: {
-        //   "currentUser": ["$meteor", function($meteor){
-        //     return $meteor.requireUser();
-        //   }]
-        // }
       })
-      .state('list', {
+      .state('home.list', {
         url: '/lists/:listId',
         views: {
           'home-tab': {
@@ -64,11 +55,6 @@ angular.module("familyst").config(['$urlRouterProvider', '$stateProvider', '$loc
             controller: 'ItemsListCtrl'
           }
         }
-        // resolve: {
-        //   "currentUser": ["$meteor", function($meteor){
-        //     return $meteor.requireUser();
-        //   }]
-        // }
       });
 
       $urlRouterProvider.otherwise("/login");
