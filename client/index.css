@@ -2,8 +2,20 @@ html, body {
   height: 100%;
 }
 
-.list-container {
+.bar-header button {
+  border: none;
+}
+
+.lists-view {
+  background-color: #EAEAEA;
+}
+
+.list-container ion-item, .list-container .item-content{
   /*margin-bottom: 0px;*/
+  /*background: #EAEAEA;*/
+  background-color: transparent;
+  border: none;
+  padding: 0px;
 }
 
 .list-container .item-button {
@@ -59,4 +71,46 @@ html, body {
 
 .list-container #new-item-input {
   direction: auto;
+}
+
+
+/*=========== new list design ===========*/
+
+.list-item-list {
+  /*border: 1px solid black;*/
+  border: 1px solid rgb(56, 126, 245);
+  border-top: 3px solid rgb(56, 126, 245);
+  height: 80px;
+  width: 92%;
+  margin: 10px auto;
+  /*text-align: center;*/
+  /*background-image: url(list-default-background.jpeg);*/
+  background-image: url(notebook-2.jpg);
+  background-position: 430px 208px;
+  background-size: 925px;
+  /*color: white;*/
+  font-size: 19px;
+  padding: 16px;
+  position: relative;
+  /*background: white;*/
+  /*text-shadow: 2px 2px 2px 2px #2F0000;*/
+}
+
+/*.list-item-list.deletable {
+  margin-right: 60px
+}*/
+
+.list-item-list:hover {
+  background: #ccc
+}
+
+.list-item-list .users {
+  color: #9D9D9D;
+  font-size: 13px;
+}
+
+.list-item-list .item-button {
+  position: absolute;
+  top: 14px;
+  right: 0;
 }
