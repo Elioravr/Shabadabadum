@@ -2,7 +2,7 @@ angular
   .module('familyst')
   .controller('RegisterCtrl', RegisterCtrl);
 
-RegisterCtrl = ['$scope', '$rootScope', '$state', '$ionicPopup', '$ionicHistory', '$location'];
+RegisterCtrl.$inject = ['$scope', '$rootScope', '$state', '$ionicPopup', '$ionicHistory', '$location'];
 
 function RegisterCtrl ($scope, $rootScope, $state, $ionicPopup, $ionicHistory, $location) {
 
@@ -38,11 +38,7 @@ function RegisterCtrl ($scope, $rootScope, $state, $ionicPopup, $ionicHistory, $
   }
 
   function goToHome () {
-    $ionicHistory.nextViewOptions({
-      disableAnimate: true,
-      disableBack: true
-    });
-    $location.path("/lists");
+    $state.go("home.lists")
   }
 
   function alertPasswordsError () {
