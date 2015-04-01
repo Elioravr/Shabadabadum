@@ -33,5 +33,6 @@ function ItemsListCtrl ($scope, $meteor, $rootScope, $stateParams) {
   function remove (item) {
     var index = $scope.list.items.indexOf(item);
     $scope.list.items.splice(index, 1);
+    $scope.list.save();
   }
 }
