@@ -27,6 +27,7 @@ function ItemsListCtrl ($scope, $meteor, $rootScope, $stateParams) {
 
   function markAsDone (item) {
     item.isDone = !item.isDone;
+    $scope.list.save();
   }
 
   function remove (item) {
