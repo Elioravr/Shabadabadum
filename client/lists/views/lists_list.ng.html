@@ -64,9 +64,9 @@
           </button>
         </ion-item>
       </ion-list> -->
-      <ion-toggle ng-model="$parent.shouldShowDelete">
+      <!-- <ion-toggle ng-model="$parent.shouldShowDelete">
         Show Delete?
-      </ion-toggle>
+      </ion-toggle> -->
       <ion-list>
         <ion-item ng-repeat="list in lists">
           <ion-delete-button class="ion-minus-circled" ng-click="remove(list); $event.stopPropagation();"></ion-delete-button>
