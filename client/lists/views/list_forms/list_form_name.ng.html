@@ -1,0 +1,17 @@
+<ion-view view-title="Create new list">
+  <ion-nav-buttons side="secondary">
+    <button class="button button-clear" ng-click="goToUsersForm()">
+      Next
+    </button>
+  </ion-nav-buttons>
+  <ion-content class="new-list-form">
+    <div class="card">
+      <label class="item item-input">
+        <i class="icon ion-android-list placeholder-icon"></i>
+        <input dir="auto" type="text" placeholder="What's your list name?" ng-model="$parent.listName">
+      </label>
+    </div>
+
+    <div class="cart-picture"></div>
+  </ion-content>
+</ion-view>
