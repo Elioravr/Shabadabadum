@@ -2,10 +2,27 @@ angular
   .module('familyst')
   .controller('ItemsListCtrl', ItemsListCtrl);
 
-ItemsListCtrl.$inject = ['$scope', '$meteor', '$rootScope', '$stateParams'];
+ItemsListCtrl.$inject = [
+  '$scope',
+  '$meteor',
+  '$rootScope',
+  '$stateParams',
+  '$ionicNavBarDelegate',
+  '$state'
+];
 
-function ItemsListCtrl ($scope, $meteor, $rootScope, $stateParams) {
+function ItemsListCtrl ($scope,
+                        $meteor,
+                        $rootScope,
+                        $stateParams,
+                        $ionicNavBarDelegate,
+                        $state) {
+
   $scope.list = $meteor.object(Lists, $stateParams.listId, false);
+
+  $scope.$on('$ionicView.beforeEnter', function () {
+    $ionicNavBarDelegate.showBackButton(true);
+  });
 
   // Functions declartion
   $scope.insert = insert;

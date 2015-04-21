@@ -2,13 +2,29 @@ angular
   .module('familyst')
   .controller('RegisterCtrl', RegisterCtrl);
 
-RegisterCtrl.$inject = ['$scope', '$rootScope', '$state', '$ionicPopup', '$ionicHistory', '$location'];
+RegisterCtrl.$inject = ['$scope',
+                        '$rootScope',
+                        '$state',
+                        '$ionicPopup',
+                        '$ionicLoading',
+                        '$ionicNavBarDelegate'];
 
-function RegisterCtrl ($scope, $rootScope, $state, $ionicPopup, $ionicHistory, $location) {
+function RegisterCtrl ($scope,
+                       $rootScope,
+                       $state,
+                       $ionicPopup,
+                       $ionicLoading,
+                       $ionicNavBarDelegate) {
+
+  $scope.$on('$ionicView.beforeEnter', function () {
+    $ionicNavBarDelegate.showBackButton(true);
+  });
 
   // Functions declartion
   $scope.register = register;
   $scope.serializeUser = serializeUser;
+  $scope.showLoading = showLoading;
+  $scope.stopLoading = stopLoading;
   $scope.goToHome = goToHome;
   $scope.alertPasswordsError = alertPasswordsError;
   $scope.clearForm = clearForm;
@@ -16,8 +32,10 @@ function RegisterCtrl ($scope, $rootScope, $state, $ionicPopup, $ionicHistory, $
 
   function register () {
     if ($scope.confirmPasswords()) {
+      $scope.showLoading();
       var user = $scope.serializeUser();
       Accounts.createUser(user, function () {
+        $scope.stopLoading();
         $scope.clearForm();
         $scope.goToHome();
       });
@@ -35,6 +53,16 @@ function RegisterCtrl ($scope, $rootScope, $state, $ionicPopup, $ionicHistory, $
           lastName: $scope.lastName
       }
     }
+  }
+
+  function showLoading () {
+    $ionicLoading.show({
+      templateUrl: "client/users/views/loading.ng.html"
+    });
+  }
+
+  function stopLoading () {
+    $ionicLoading.hide();
   }
 
   function goToHome () {
