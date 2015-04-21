@@ -30,9 +30,25 @@ Schemas.List = new SimpleSchema({
     denyInsert: true,
     optional: true
   },
+  users: {
+    type: [Object],
+    optional: false
+  },
   items: {
     type: [Object],
     optional: true,
+    autoValue: function () {
+      if (this.isUpdate) {
+        // return this.field("content");
+      }
+      else {
+        return [];
+      }
+    }
+  },
+  messages: {
+    type: [Object],
+    optional: false,
     autoValue: function () {
       if (this.isUpdate) {
         // return this.field("content");
@@ -47,7 +63,67 @@ Schemas.List = new SimpleSchema({
   },
   'items.$.isDone': {
     type: Boolean
-  }
+  },
+  'items.$.createdAt': {
+    type: Date,
+    autoValue: function() {
+      return new Date;
+    }
+  },
+  'users.$._id': {
+    type: String
+  },
+  'users.$.profile': {
+    type: Object
+  },
+  'users.$.profile.firstName': {
+    type: String,
+    optional: true
+  },
+  'users.$.profile.lastName': {
+    type: String,
+    optional: true
+  },
+  'users.$.profile.name': {
+    type: String,
+    optional: true
+  },
+  'users.$.profile.picture': {
+    type: String,
+    optional: true
+  },
+  'messages.$.content': {
+    type: String
+  },
+  'messages.$.userId': {
+    type: String,
+    optional: false
+  },
+  'messages.$.createdAt': {
+    type: Date,
+    autoValue: function() {
+      return new Date;
+    }
+  },
+  'messages.$.profile': {
+    type: Object
+  },
+  'messages.$.profile.firstName': {
+    type: String,
+    optional: true
+  },
+  'messages.$.profile.lastName': {
+    type: String,
+    optional: true
+  },
+  'messages.$.profile.name': {
+    type: String,
+    optional: true
+  },
+  'messages.$.profile.picture': {
+    type: String,
+    optional: true
+  },
 });
 
 Lists.attachSchema(Schemas.List);
