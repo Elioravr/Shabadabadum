@@ -4,14 +4,19 @@
  -->
 
 <ion-view title="{{$root.currentUser | displayName}} Profile">
-  <ion-content>
+  <ion-content class="profile">
     <div class="padding">
       <div class="title">{{$root.currentUser | displayName}}</div>
-      <button class="button button-block button-balanced" ng-click="logout()">
-        Logout
-      </button>
-      <!-- <div class="bar bar-footer bar-balanced"> -->
-      <!-- </div> -->
+      <!-- <div class="user-picture user-picture-facebook"
+           ng-show="$root.currentUser.profile.picture"
+           style="background-image: url({{$root.currentUser.profile.picture}})"></div>
+      <div class="user-picture" ng-hide="$root.currentUser.profile.picture"></div> -->
+      <img src="{{view.profileSrc}}" class="{{view.class}}">
+      <div class="controls">
+        <button class="button button-block button-balanced" ng-click="logout()">
+          Logout
+        </button>
+      </div>
     </div>
   </ion-content>
 </ion-view>
