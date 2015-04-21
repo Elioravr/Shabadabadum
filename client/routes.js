@@ -1,13 +1,3 @@
-// angular.module("familyst").run(["$rootScope", "$state", function($rootScope, $state) {
-//   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
-//     // We can catch the error thrown when the $requireUser promise is rejected
-//     // and redirect the user back to the main page
-//     if (error === "AUTH_REQUIRED") {
-//       $state.go("login");
-//     }
-//   });
-// }]);
-
 angular.module("familyst").config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
   function($urlRouterProvider, $stateProvider, $locationProvider){
 
@@ -45,6 +35,32 @@ angular.module("familyst").config(['$urlRouterProvider', '$stateProvider', '$loc
             templateUrl: 'client/lists/views/lists_list.ng.html',
             controller: 'ListsListCtrl'
           }
+      }
+      })
+      .state('home.lists.newList', {
+        url: '/newList',
+        abstract: true,
+        templateUrl: 'client/lists/views/list_forms/list_form_base.ng.html',
+      })
+      // .state('home.lists.newList.name', {
+      .state('home.newListName', {
+        url: '/newListName',
+        views: {
+          'home-tab': {
+            templateUrl: 'client/lists/views/list_forms/list_form_name.ng.html',
+            controller: 'ListFormNameCtrl'
+          }
+        }
+      })
+      // .state('home.lists.newList.users', {
+      .state('home.newListUsers', {
+        params: { listName: "" },
+        url: '/newListUsers',
+        views: {
+          'home-tab': {
+            templateUrl: 'client/lists/views/list_forms/list_form_users.ng.html',
+            controller: 'ListFormUsersCtrl'
+          }
         }
       })
       .state('home.list', {
@@ -53,6 +69,25 @@ angular.module("familyst").config(['$urlRouterProvider', '$stateProvider', '$loc
           'home-tab': {
             templateUrl: 'client/items/views/items_list.ng.html',
             controller: 'ItemsListCtrl'
+          }
+        }
+      })
+      .state('home.list.details', {
+        url: '/details',
+        views: {
+          'home-tab': {
+            templateUrl: 'client/items/views/items_list.ng.html',
+            controller: 'ItemsListCtrl'
+          }
+        }
+      })
+      // .state('home.list.chat', {
+      .state('home.listChat', {
+        url: '/:listId/chat',
+        views: {
+          'home-tab': {
+            templateUrl: 'client/lists/views/list_chat.ng.html',
+            controller: 'ListChatCtrl'
           }
         }
       });
