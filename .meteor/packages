@@ -5,10 +5,12 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
 accounts-password
 urigo:angular
 accounts-facebook
 urigo:ionic
 angularui:angular-ui-router
 aldeed:collection2
+reywood:publish-composite
+service-configuration
+mrt:moment

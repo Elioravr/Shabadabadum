@@ -1,9 +1,17 @@
 <ion-view view-title="{{list.name}}">
+  <ion-nav-buttons side="secondary">
+    <button class="button button-clear" ui-sref="home.list.details">
+      <i class="icon ion-ios-information-outline"></i>
+    </button>
+  </ion-nav-buttons>
   <ion-content>
+    <button class="button button-full button-balanced" ui-sref="home.listChat({listId: list._id.toString()})">
+      Chat!
+    </button>
     <div class="list list-container">
       <form>
         <label class="item item-input item-button-right">
-          <input id="new-item-input" ng-model="$parent.newItem.title" type="text" placeholder="Add New Item">
+          <input class="list-item-input" dir="auto" ng-model="$parent.newItem.title" type="text" placeholder="Add New Item">
           <button class="item-button insert-item-button button" ng-click="insert()">
             <i class="icon ion-ios-plus"></i>
           </button>
@@ -16,7 +24,7 @@
         <div class="item-checkbox" ng-click="markAsDone(item)">
           <i class="ion-ios-circle-outline" ng-hide="item.isDone"></i>
           <i class="ion-ios-checkmark" ng-show="item.isDone"></i>
-          <div class="item-text" ng-class="{done: item.isDone}">{{item.title}}</div>
+          <div dir="auto" class="item-text" ng-class="{done: item.isDone}">{{item.title}}</div>
         </div>
         <button class="item-button remove-item-button button" ng-click="remove(item)">
           <i class="icon ion-ios-close"></i>

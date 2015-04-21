@@ -1,0 +1,33 @@
+<ion-view view-title="Chat" hide-tabs>
+  <ion-content class="chat-container">
+    <div class="list list-container">
+      <div ng-repeat="message in list.messages" class="message-container" ng-class="{'my-message': message.userId === $root.currentUser._id }">
+        <div class="chat-message">
+          <div ng-if="message.userId !== $root.currentUser._id" class="user">{{message | displayName}}</div>
+          <div class="content" dir="auto">
+            {{message.content}}
+          </div>
+          <div class="time">
+            {{getMomentedDate(message.createdAt)}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+  <ion-footer-bar>
+    <form class="new-message-form">
+      <!-- <label class="item item-input item-button-right">
+        <input class="list-item-input" dir="auto" ng-model="$parent.newMessage" type="text" placeholder="Your message">
+        <button class="item-button insert-item-button button clear-button" ng-click="$parent.insertNewMessage()">
+          Send
+        </button>
+      </label> -->
+      <div class="item-input-wrapper">
+        <textarea class="chat-text" dir="auto" ng-model="newMessage" value="" placeholder="Send a message..." ></textarea>
+        <button class="item-button insert-item-button button button-clear button-positive" ng-class="{ 'disabled': newMessage.length === 0 }" ng-click="insertNewMessage()">
+          Send
+        </button>
+      </div>
+    </form>
+  </ion-footer-bar>
+</ion-view>
