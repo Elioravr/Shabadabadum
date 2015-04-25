@@ -9,7 +9,8 @@ ItemsListCtrl.$inject = [
   '$stateParams',
   '$ionicNavBarDelegate',
   '$state',
-  '$filter'
+  '$filter',
+  '$ionicLoading'
 ];
 
 function ItemsListCtrl ($scope,
@@ -18,19 +19,27 @@ function ItemsListCtrl ($scope,
                         $stateParams,
                         $ionicNavBarDelegate,
                         $state,
-                        $filter) {
-
-  $scope.list = $meteor.object(Lists, $stateParams.listId, false);
-
-  $scope.$on('$ionicView.beforeEnter', function () {
-    $ionicNavBarDelegate.showBackButton(true);
-  });
+                        $filter,
+                        $ionicLoading) {
 
   // Functions declartion
   $scope.insert = insert;
   $scope.markAsDone = markAsDone;
   $scope.remove = remove;
   $scope.addItemMessage = addItemMessage;
+  $scope.showLoading = showLoading;
+  $scope.stopLoading = stopLoading;
+
+  $scope.showLoading();
+
+  $meteor.subscribe("list", $stateParams.listId).then(function(subscriptionHandle) {
+    $scope.list = $meteor.object(Lists, $stateParams.listId, false);
+    $scope.stopLoading();
+  });
+
+  $scope.$on('$ionicView.beforeEnter', function () {
+    $ionicNavBarDelegate.showBackButton(true);
+  });
 
   function insert () {
     $scope.newItem.isDone = false;
@@ -73,5 +82,15 @@ function ItemsListCtrl ($scope,
     var index = $scope.list.items.indexOf(item);
     $scope.list.items.splice(index, 1);
     $scope.list.save();
+  }
+
+  function showLoading () {
+    $ionicLoading.show({
+      templateUrl: "client/users/views/loading.ng.html"
+    });
+  }
+
+  function stopLoading () {
+    $ionicLoading.hide();
   }
 }

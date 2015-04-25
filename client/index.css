@@ -247,6 +247,15 @@ html, body {
   background-color: white;
   font-size: 110%;
 }
+
+/*.chat-message,
+.chat-message .user,
+.chat-message .content,
+.chat-message .time {
+  display: inline-block;
+  width: auto;
+}*/
+
 /*
 .chat-message.last {
   margin-bottom: 50px;

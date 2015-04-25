@@ -66,7 +66,7 @@ angular.module("familyst").config(['$urlRouterProvider', '$stateProvider', '$loc
       .state('home.list', {
         url: '/lists/:listId',
         views: {
-          'home-tab': {
+          'home-tab@home': {
             templateUrl: 'client/items/views/items_list.ng.html',
             controller: 'ItemsListCtrl'
           }

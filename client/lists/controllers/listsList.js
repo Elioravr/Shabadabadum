@@ -24,6 +24,16 @@ function ListsListCtrl ($meteor,
                         $ionicLoading,
                         $ionicNavBarDelegate) {
 
+  // Functions declartion
+  $scope.insert = insert;
+  $scope.toggleEdit = toggleEdit;
+  $scope.goToNewList = goToNewList;
+  $scope.remove = remove;
+  $scope.showLoading = showLoading;
+  $scope.stopLoading = stopLoading;
+
+  $scope.showLoading();
+
   if($rootScope.currentUser === "undefined" || $rootScope.currentUser === null) {
       $state.go("login");
   }
@@ -32,16 +42,14 @@ function ListsListCtrl ($meteor,
     $ionicNavBarDelegate.showBackButton(false);
   });
 
-  $scope.lists = $meteor.collection(Lists).subscribe('lists');//.then(function () {
-  $scope.editable = false;
-  //   console.log("Aaaaaaaaa");
-  // });
+  // $scope.lists = $meteor.collection(Lists).subscribe('lists');
+  // $scope.editable = false;
 
-  // Functions declartion
-  $scope.insert = insert;
-  $scope.toggleEdit = toggleEdit;
-  $scope.goToNewList = goToNewList;
-  $scope.remove = remove;
+  $meteor.subscribe("lists").then(function(subscriptionHandle) {
+    $scope.lists = $meteor.collection(Lists).subscribe('lists', false);
+    $scope.stopLoading();
+    $scope.editable = false;
+  });
 
   function insert () {
     $scope.lists.save($scope.newList).then(
@@ -75,4 +83,14 @@ function ListsListCtrl ($meteor,
       });
     }
   };
+
+  function showLoading () {
+    $ionicLoading.show({
+      templateUrl: "client/users/views/loading.ng.html"
+    });
+  }
+
+  function stopLoading () {
+    $ionicLoading.hide();
+  }
 }
