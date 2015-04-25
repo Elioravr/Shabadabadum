@@ -35,7 +35,7 @@ angular.module("familyst").config(['$urlRouterProvider', '$stateProvider', '$loc
             templateUrl: 'client/lists/views/lists_list.ng.html',
             controller: 'ListsListCtrl'
           }
-      }
+        }
       })
       .state('home.lists.newList', {
         url: '/newList',
@@ -81,11 +81,10 @@ angular.module("familyst").config(['$urlRouterProvider', '$stateProvider', '$loc
           }
         }
       })
-      // .state('home.list.chat', {
-      .state('home.listChat', {
-        url: '/:listId/chat',
+      .state('home.list.chat', {
+        url: '/chat',
         views: {
-          'home-tab': {
+          'home-tab@home': {
             templateUrl: 'client/lists/views/list_chat.ng.html',
             controller: 'ListChatCtrl'
           }
