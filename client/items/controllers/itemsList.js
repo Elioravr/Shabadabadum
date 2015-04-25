@@ -8,7 +8,8 @@ ItemsListCtrl.$inject = [
   '$rootScope',
   '$stateParams',
   '$ionicNavBarDelegate',
-  '$state'
+  '$state',
+  '$filter'
 ];
 
 function ItemsListCtrl ($scope,
@@ -16,7 +17,8 @@ function ItemsListCtrl ($scope,
                         $rootScope,
                         $stateParams,
                         $ionicNavBarDelegate,
-                        $state) {
+                        $state,
+                        $filter) {
 
   $scope.list = $meteor.object(Lists, $stateParams.listId, false);
 
@@ -28,13 +30,33 @@ function ItemsListCtrl ($scope,
   $scope.insert = insert;
   $scope.markAsDone = markAsDone;
   $scope.remove = remove;
+  $scope.addItemMessage = addItemMessage;
 
   function insert () {
     $scope.newItem.isDone = false;
     $scope.list.items.push($scope.newItem);
     $scope.list.save().then(
       function () {
+        $scope.addItemMessage($scope.newItem.title);
         $scope.newItem.title = '';
+      },
+      function () {
+        console.log(arguments);
+      }
+    );
+  }
+
+  function addItemMessage (title) {
+    username = $filter('displayName')($rootScope.currentUser);
+    content = username + " has added \"" + title + "\" to the list.";
+    newMessage = {
+      content:   content,
+      createdAt: new Date()
+    };
+    $scope.list.messages.push(newMessage);
+    $scope.list.save().then(
+      function () {
+        console.log(arguments);
       },
       function () {
         console.log(arguments);

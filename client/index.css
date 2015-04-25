@@ -242,7 +242,6 @@ html, body {
   margin: 0px;
   margin-top: 5px;
   margin-left: 5px;
-  margin-bottom: 5px;
   padding: 7px;
   clear: both;
   background-color: white;
@@ -254,13 +253,38 @@ html, body {
 }*/
 
 .my-message {
-
+  direction: rtl;
 }
 
 .my-message .chat-message {
   background-color: rgb(255, 255, 212);
-  float: right;
   margin-right: 5px;
+  display: inline-block;
+}
+
+/* content for users messages */
+.chat-message .content {
+  font-size: 14px;
+}
+
+.alert-message {
+  text-align: center;
+}
+
+.alert-message .chat-message {
+  background-color: rgb(207, 205, 255);
+  margin: auto;
+  margin-top: 5px;
+}
+
+/* content for users messages */
+.alert-message .content {
+  font-size: 12px;
+}
+
+.alert-message .chat-message .user,
+.alert-message .chat-message .time {
+  display: none;
 }
 
 .chat-message .user {
@@ -268,13 +292,16 @@ html, body {
   border-bottom: 1px solid #ccc;
   width: 100%;
   margin-bottom: 5px;
+  font-size: 12px;
 }
 
 .message-container .time {
   color: #A8A8A8;
+  font-size: 11px;
 }
 
 .my-message .time {
+  direction: ltr;
   text-align: right;
 }
 
