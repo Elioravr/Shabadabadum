@@ -13,7 +13,7 @@ Schemas.List = new SimpleSchema({
     autoValue: function() {
       if (this.isInsert) {
         return new Date;
-      } else if (this.isUpsert) {
+      } else if (this.isUpdate) {
         return {$setOnInsert: new Date};
       } else {
         this.unset();
@@ -97,16 +97,15 @@ Schemas.List = new SimpleSchema({
   },
   'messages.$.userId': {
     type: String,
-    optional: false
+    optional: true
   },
   'messages.$.createdAt': {
     type: Date,
-    autoValue: function() {
-      return new Date;
-    }
+    optional: false
   },
   'messages.$.profile': {
-    type: Object
+    type: Object,
+    optional: true
   },
   'messages.$.profile.firstName': {
     type: String,
