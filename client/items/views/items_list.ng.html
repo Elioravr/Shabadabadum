@@ -4,26 +4,38 @@
       <i class="icon ion-ios-information-outline"></i>
     </button>
   </ion-nav-buttons>
-  <ion-content>
-    <button class="button button-full button-balanced" ui-sref="home.list.chat({listId: list._id.toString()})">
-      Chat!
-    </button>
+  <ion-content class="items-list">
+    <div class="controls">
+      <div class="list-status">
+        <div class="done">{{$parent.itemsLeft()}}</div>
+        <div class="total">items left</div>
+      </div>
+      <div class="chat-button" ui-sref="home.list.chat({listId: list._id.toString()})">
+        <div class="text">Talk about it!</div>
+      </div>
+      <div class="list-status-1">
+        Something else
+      </div>
+    </div>
     <div class="list list-container">
       <form>
-        <label class="item item-input item-button-right">
+        <div class="item item-input item-button-right">
           <input class="list-item-input" dir="auto" ng-model="$parent.newItem.title" type="text" placeholder="Add New Item">
           <button class="item-button insert-item-button button" ng-click="insert()">
-            <i class="icon ion-ios-plus"></i>
+            <!-- <i class="icon ion-ios-plus"></i> -->
+            Add
           </button>
-        </label>
+        </div>
       </form>
       <ion-toggle ng-model="shouldHideCompleted">
         Hide Completed?
       </ion-toggle>
       <div ng-repeat="item in list.items" class="item item-button-right" ng-hide="shouldHideCompleted && item.isDone">
         <div class="item-checkbox" ng-click="markAsDone(item)">
-          <i class="ion-ios-circle-outline" ng-hide="item.isDone"></i>
-          <i class="ion-ios-checkmark" ng-show="item.isDone"></i>
+          <i class="ion-android-checkbox-outline-blank" ng-hide="item.isDone"></i>
+          <!-- <i class="ion-ios-circle-outline" ng-hide="item.isDone"></i> -->
+          <i class="ion-android-checkbox-outline" ng-show="item.isDone"></i>
+          <!-- <i class="ion-ios-checkmark" ng-show="item.isDone"></i> -->
           <div dir="auto" class="item-text" ng-class="{done: item.isDone}">{{item.title}}</div>
         </div>
         <button class="item-button remove-item-button button" ng-click="remove(item)">

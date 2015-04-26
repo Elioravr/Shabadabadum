@@ -10,7 +10,8 @@ ItemsListCtrl.$inject = [
   '$ionicNavBarDelegate',
   '$state',
   '$filter',
-  '$ionicLoading'
+  '$ionicLoading',
+  '$ionicScrollDelegate'
 ];
 
 function ItemsListCtrl ($scope,
@@ -20,13 +21,15 @@ function ItemsListCtrl ($scope,
                         $ionicNavBarDelegate,
                         $state,
                         $filter,
-                        $ionicLoading) {
+                        $ionicLoading,
+                        $ionicScrollDelegate) {
 
   // Functions declartion
   $scope.insert = insert;
   $scope.markAsDone = markAsDone;
   $scope.remove = remove;
   $scope.addItemMessage = addItemMessage;
+  $scope.itemsLeft = itemsLeft;
   $scope.showLoading = showLoading;
   $scope.stopLoading = stopLoading;
 
@@ -39,6 +42,7 @@ function ItemsListCtrl ($scope,
 
   $scope.$on('$ionicView.beforeEnter', function () {
     $ionicNavBarDelegate.showBackButton(true);
+    $ionicScrollDelegate.scrollTop(true);
   });
 
   function insert () {
@@ -82,6 +86,13 @@ function ItemsListCtrl ($scope,
     var index = $scope.list.items.indexOf(item);
     $scope.list.items.splice(index, 1);
     $scope.list.save();
+  }
+
+  function itemsLeft () {
+    left = _.filter($scope.list.items, function(item) {
+      return(item.isDone !== true);
+    });
+    return left.length;
   }
 
   function showLoading () {
