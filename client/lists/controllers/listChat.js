@@ -23,7 +23,6 @@ function ListChatCtrl ($meteor,
   // Functions declaration
   $scope.getMomentedDate = getMomentedDate;
   $scope.insertNewMessage = insertNewMessage;
-
   $scope.showLoading = showLoading;
   $scope.stopLoading = stopLoading;
 
@@ -55,9 +54,9 @@ function ListChatCtrl ($meteor,
     };
 
     $scope.list.messages.push(newMessage);
+    $scope.newMessage = '';
     $scope.list.save().then(
       function () {
-        $scope.newMessage = '';
         $ionicScrollDelegate.scrollBottom(true);
       },
       function () {
