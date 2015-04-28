@@ -69,8 +69,22 @@ html, body {
   color: black;
   font-size: 17px;
   position: absolute;
-  top: 20px;
+  top: 10px;
   margin-left: 10px;
+}
+
+.list-container .item-user {
+  display: inline-block;
+  color: black;
+  font-size: 12px;
+  position: absolute;
+  top: 34px;
+  margin-left: 10px;
+}
+
+.list-container .item-user.done {
+  text-decoration: none;
+  color: #ccc !important;
 }
 
 .list-container .item-checkbox {

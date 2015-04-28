@@ -30,14 +30,14 @@
       <ion-toggle ng-model="shouldHideCompleted">
         Hide Completed?
       </ion-toggle>
-      <div ng-repeat="item in items()" class="item item-button-right" ng-hide="shouldHideCompleted && item.isDone">
-        <div class="item-checkbox" ng-click="markAsDone(item)">
-          <!-- <i class="ion-android-checkbox-outline-blank" ng-hide="item.isDone"></i> -->
-          <!-- <i class="ion-ios-circle-outline" ng-hide="item.isDone"></i> -->
-          <!-- <i class="ion-android-checkbox-outline" ng-show="item.isDone"></i> -->
+      <div ng-repeat="item in items()"
+           class="item item-button-right"
+           ng-hide="shouldHideCompleted && item.isDone"
+           ng-click="markAsDone(item)">
+        <div class="item-checkbox">
           <i class="{{getItemCheckboxIcon(item)}}"></i>
-          <!-- <i class="ion-ios-checkmark" ng-show="item.isDone"></i> -->
           <div dir="auto" class="item-text" ng-class="{done: item.isDone}">{{item.title}}</div>
+          <div ng-if="item.profile" dir="auto" class="item-user" ng-class="{done: item.isDone}">{{item | displayName}}</div>
         </div>
         <button class="item-button remove-item-button button" ng-click="remove(item)">
           <i class="icon ion-ios-close"></i>

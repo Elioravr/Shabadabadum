@@ -68,6 +68,26 @@ Schemas.List = new SimpleSchema({
     type: Date,
     optional: false
   },
+  'items.$.profile': {
+    type: Object,
+    optional: true
+  },
+  'items.$.profile.firstName': {
+    type: String,
+    optional: true
+  },
+  'items.$.profile.lastName': {
+    type: String,
+    optional: true
+  },
+  'items.$.profile.name': {
+    type: String,
+    optional: true
+  },
+  'items.$.profile.picture': {
+    type: String,
+    optional: true
+  },
   'users.$._id': {
     type: String
   },
@@ -120,7 +140,7 @@ Schemas.List = new SimpleSchema({
   'messages.$.profile.picture': {
     type: String,
     optional: true
-  },
+  }
 });
 
 Lists.attachSchema(Schemas.List);

@@ -29,6 +29,7 @@ function ItemsListCtrl ($scope,
   $scope.markAsDone = markAsDone;
   $scope.remove = remove;
   $scope.addItemMessage = addItemMessage;
+  // $scope.itemsDone = itemsDone;
   $scope.itemsLeft = itemsLeft;
   $scope.items = items;
   $scope.getItemCheckboxIcon = getItemCheckboxIcon;
@@ -48,13 +49,18 @@ function ItemsListCtrl ($scope,
   });
 
   function insert () {
-    $scope.newItem.createdAt = new Date();
-    $scope.newItem.isDone = false;
-    $scope.list.items.push($scope.newItem);
+    var newItem = {
+      title: $scope.newItem.title,
+      isDone: false,
+      profile: $rootScope.currentUser.profile,
+      createdAt: new Date()
+    };
+    $scope.newItem.title = '';
+
+    $scope.list.items.push(newItem);
     $scope.list.save().then(
       function () {
-        $scope.addItemMessage($scope.newItem.title);
-        $scope.newItem.title = '';
+        $scope.addItemMessage(newItem.title);
       },
       function () {
         console.log(arguments);
@@ -81,13 +87,9 @@ function ItemsListCtrl ($scope,
   }
 
   function markAsDone (item) {
-    console.log("markAsDone start");
-    $scope.showLoading();
     item.isDone = !item.isDone;
     $scope.list.save().then(
       function () {
-        console.log("markAsDone ends");
-        $scope.stopLoading();
       }
     );
   }
@@ -108,6 +110,17 @@ function ItemsListCtrl ($scope,
     });
     return items;
   }
+
+  // function itemsDone () {
+  //   if (!$scope.list) {
+  //     return 0;
+  //   }
+
+  //   left = _.filter($scope.list.items, function(item) {
+  //     return(item.isDone === true);
+  //   });
+  //   return left.length;
+  // }
 
   function itemsLeft () {
     if (!$scope.list) {
