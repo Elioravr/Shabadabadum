@@ -66,9 +66,7 @@ Schemas.List = new SimpleSchema({
   },
   'items.$.createdAt': {
     type: Date,
-    autoValue: function() {
-      return new Date;
-    }
+    optional: false
   },
   'users.$._id': {
     type: String
