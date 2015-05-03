@@ -3,6 +3,11 @@
   src: url('fonts/JosefinSans-Light.ttf');
 }
 
+@font-face {
+  font-family: 'Tangerine Bold';
+  src: url('fonts/Tangerine_Bold.ttf');;
+}
+
 html, body {
   height: 100%;
 }
@@ -211,6 +216,58 @@ html, body {
 
 /*=========== login form ===========*/
 
+.login-form {
+  background-image: url(login-background.png);
+  background-position: 50% 50%;
+  background-size: 230%;
+}
+
+/*.login-form .login-background {
+  background-image: url(super-jpg.jpg);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 230%;
+  -webkit-filter: blur(3px);
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+}*/
+
+/*.login-form .login-title {
+  font-family: "Tangerine Bold";
+  font-size: 40px;
+  text-align: center;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  opacity: 0.8;
+}*/
+
+.login-form .login-title {
+  margin: auto;
+  background-image: url(familyst-logo.png);
+  background-size: 100%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  width: 60%;
+  height: 80px;
+}
+
+.login-form .padding {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(50% - 255px);
+}
+
+.login-form .item.item-input {
+  background-color: transparent;
+}
+
 .login-form .login-with-facebook-icon {
   margin-right: 10px;
 }
@@ -226,11 +283,11 @@ html, body {
   display: inline-block;
   margin-left: 10px;
   margin-right: 10px;
-  color: #ccc;
+  color: white;
 }
 
 .login-form .separator {
-  border-top: 1px solid #ccc;
+  border-top: 1px solid white;
   width: 42%;
   display: inline-block;
   margin-bottom: 4px;

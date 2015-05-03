@@ -24,6 +24,12 @@ function LoginCtrl ($scope,
     $ionicNavBarDelegate.showBackButton(false);
   });
 
+  $scope.$on('$ionicView.afterEnter', function () {
+    setTimeout(function() {
+      $('.login-form .padding').fadeIn()
+    }, 1000)
+  });
+
   // Functions declartion
   $scope.goToSignup = goToSignup;
   $scope.showLoading = showLoading;
