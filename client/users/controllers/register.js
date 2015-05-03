@@ -21,6 +21,7 @@ function RegisterCtrl ($scope,
   });
 
   // Functions declartion
+  $scope.backToLogin = backToLogin;
   $scope.register = register;
   $scope.serializeUser = serializeUser;
   $scope.showLoading = showLoading;
@@ -29,6 +30,10 @@ function RegisterCtrl ($scope,
   $scope.alertPasswordsError = alertPasswordsError;
   $scope.clearForm = clearForm;
   $scope.confirmPasswords = confirmPasswords;
+
+  function backToLogin () {
+    $state.back();
+  }
 
   function register () {
     if ($scope.confirmPasswords()) {
