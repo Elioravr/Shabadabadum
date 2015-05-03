@@ -60,7 +60,7 @@ function ItemsListCtrl ($scope,
     $scope.list.items.push(newItem);
     $scope.list.save().then(
       function () {
-        $scope.addItemMessage(newItem.title);
+        $scope.addItemMessage(newItem.title, 'insert');
       },
       function () {
         console.log(arguments);
@@ -68,9 +68,13 @@ function ItemsListCtrl ($scope,
     );
   }
 
-  function addItemMessage (title) {
+  function addItemMessage (title, action) {
     username = $filter('displayName')($rootScope.currentUser);
-    content = username + " has added \"" + title + "\" to the list.";
+    if (action === 'insert') {
+      content = username + " has added \"" + title + "\" to the list.";
+    } else {
+      content = username + " has removed \"" + title + "\" to the list.";
+    }
     newMessage = {
       content:   content,
       createdAt: new Date()
@@ -97,7 +101,11 @@ function ItemsListCtrl ($scope,
   function remove (item) {
     var index = $scope.list.items.indexOf(item);
     $scope.list.items.splice(index, 1);
-    $scope.list.save();
+    $scope.list.save().then(
+      function () {
+        $scope.addItemMessage(item.title, 'remove');
+      }
+    );
   }
 
   function items () {
