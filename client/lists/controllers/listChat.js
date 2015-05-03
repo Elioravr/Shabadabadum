@@ -31,7 +31,7 @@ function ListChatCtrl ($meteor,
   // $rootScope.hideTabs = true;
   $scope.newMessage = '';
 
-  $meteor.subscribe("list", $stateParams.listId).then(function(subscriptionHandle) {
+  $meteor.subscribe("listForChat", $stateParams.listId).then(function(subscriptionHandle) {
     $scope.list = $meteor.object(Lists, $stateParams.listId, false);
     $ionicScrollDelegate.scrollBottom(true);
     $scope.stopLoading();
