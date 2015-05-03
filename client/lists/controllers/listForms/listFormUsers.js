@@ -19,6 +19,7 @@ function ListFormUsersCtrl ($meteor,
   $scope.users = $meteor.collection(Users, false).subscribe('usersForNewListForm');
   $scope.lists = $meteor.collection(Lists).subscribe('lists');
   $scope.listName = $stateParams.listName;
+  $scope.searchedUser = '';
   $scope.chosenUsers = {};
 
   // Function declaration
@@ -48,6 +49,8 @@ function ListFormUsersCtrl ($meteor,
   }
 
   function getChosenUsers () {
+    mappedUsers = [];
+
     mappedUsers = _.map($scope.users, function (user) {
       ids = _.keys($scope.chosenUsers);
       if (_.contains(ids, user._id)) {
@@ -58,6 +61,8 @@ function ListFormUsersCtrl ($meteor,
         return chosenUser;
       }
     });
+
+    mappedUsers.push($rootScope.currentUser);
 
     return _.without(mappedUsers, undefined);
   }

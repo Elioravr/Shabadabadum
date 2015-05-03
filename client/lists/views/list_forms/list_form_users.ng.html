@@ -4,25 +4,21 @@
       Create
     </button>
   </ion-nav-buttons>
-  <!-- <div class="bar bar-subheader">
-    <h2 class="title">Choose users for: {{listName}}</h2>
-  </div> -->
   <div class="bar bar-subheader item-input-inset">
     <label class="item-input-wrapper">
       <i class="icon ion-ios7-search placeholder-icon"></i>
-      <input type="search" placeholder="Search">
+      <input type="search" placeholder="Search" ng-model="searchText">
     </label>
   </div>
   <ion-content class="new-list-form has-subheader">
-    <!-- <div class="list list-inset">
-      <label class="item item-input">
-        <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Search">
-      </label>
-    </div> -->
     <div class="list">
       <div class="item item-text-wrap users-list">
-        <ion-checkbox ng-model="$parent.chosenUsers[user._id]" ng-repeat="user in users">{{user | displayName}}</ion-checkbox>
+        <ion-checkbox ng-model="$parent.chosenUsers[user._id]"
+                      ng-repeat="user in users"
+                      ng-show="'{{user | displayName}}'.toLowerCase().indexOf('{{searchText}}') !== {{-1}}"
+                      ng-if="user._id !== $root.currentUser._id">
+          {{user | displayName}}
+        </ion-checkbox>
       </div>
     </div>
   </ion-content>
