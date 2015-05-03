@@ -37,7 +37,6 @@ function ListChatCtrl ($meteor,
     $scope.stopLoading();
 
     $scope.$watch('list.messages', function(newValue, oldValue) {
-      console.log(newValue);
       $ionicScrollDelegate.scrollBottom(true);
     });
   });
