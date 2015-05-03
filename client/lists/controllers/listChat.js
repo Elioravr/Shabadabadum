@@ -35,7 +35,13 @@ function ListChatCtrl ($meteor,
     $scope.list = $meteor.object(Lists, $stateParams.listId, false);
     $ionicScrollDelegate.scrollBottom(true);
     $scope.stopLoading();
+
+    $scope.$watch('list.messages', function(newValue, oldValue) {
+      console.log(newValue);
+      $ionicScrollDelegate.scrollBottom(true);
+    });
   });
+
 
   $scope.$on('$ionicView.beforeEnter', function () {
     $ionicNavBarDelegate.showBackButton(true);
