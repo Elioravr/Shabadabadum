@@ -222,6 +222,17 @@ html, body {
   background-size: 230%;
 }
 
+.login-error img {
+  width: 170px;
+  display: block;
+  margin: auto;
+}
+
+.login-error .text {
+  margin-top: 10px;
+  text-align: center;
+}
+
 /*.login-form .login-background {
   background-image: url(super-jpg.jpg);
   background-position: 50% 50%;

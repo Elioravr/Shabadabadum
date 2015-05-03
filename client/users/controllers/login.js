@@ -32,6 +32,7 @@ function LoginCtrl ($scope,
 
   // Functions declartion
   $scope.goToSignup = goToSignup;
+  $scope.alertFacebookError = alertFacebookError;
   $scope.showLoading = showLoading;
   $scope.stopLoading = stopLoading;
   $scope.login = login;
@@ -63,7 +64,7 @@ function LoginCtrl ($scope,
       $scope.stopLoading();
       if (err) {
         console.log(err);
-        throw new Meteor.Error("Facebook login failed");
+        $scope.alertFacebookError()
       }
       else {
         $scope.moveToHome();
@@ -74,6 +75,13 @@ function LoginCtrl ($scope,
   function moveToHome () {
     $scope.clearForm()
     $state.go("home.lists");
+  }
+
+  function alertFacebookError () {
+    $ionicPopup.alert({
+      title : 'There was an error',
+      templateUrl: "client/users/views/login_error.ng.html"
+    });
   }
 
   function showLoading () {
