@@ -32,11 +32,11 @@ function ListsListCtrl ($meteor,
   $scope.showLoading = showLoading;
   $scope.stopLoading = stopLoading;
 
-  $scope.showLoading();
-
   if($rootScope.currentUser === "undefined" || $rootScope.currentUser === null) {
       $state.go("login");
   }
+
+  $scope.showLoading();
 
   $scope.$on('$ionicView.beforeEnter', function () {
     $ionicNavBarDelegate.showBackButton(false);

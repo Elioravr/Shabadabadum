@@ -23,6 +23,7 @@ function RegisterCtrl ($scope,
   // Functions declartion
   $scope.backToLogin = backToLogin;
   $scope.register = register;
+  $scope.saveToCordova = saveToCordova;
   $scope.serializeUser = serializeUser;
   $scope.showLoading = showLoading;
   $scope.stopLoading = stopLoading;
@@ -41,6 +42,7 @@ function RegisterCtrl ($scope,
       var user = $scope.serializeUser();
       Accounts.createUser(user, function () {
         $scope.stopLoading();
+        $scope.saveToCordova();
         $scope.clearForm();
         $scope.goToHome();
       });
@@ -57,6 +59,14 @@ function RegisterCtrl ($scope,
           firstName: $scope.firstName,
           lastName: $scope.lastName
       }
+    }
+  }
+
+  function saveToCordova () {
+    if (cordova !== null) {
+      cordova.file["Meteor.loginToken"] = localStorage.getItem("Meteor.loginToken");
+      cordova.file["Meteor.loginTokenExpires"] = localStorage.getItem("Meteor.loginTokenExpires");
+      cordova.file["userId"] = localStorage.getItem("userId");
     }
   }
 

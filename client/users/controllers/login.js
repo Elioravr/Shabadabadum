@@ -16,9 +16,9 @@ function LoginCtrl ($scope,
                     $ionicLoading,
                     $ionicNavBarDelegate) {
 
-  if($rootScope.currentUser) {
+  $rootScope.$watch("currentUser", function() {
     $state.go("home.lists");
-  }
+  });
 
   $scope.$on('$ionicView.beforeEnter', function () {
     $ionicNavBarDelegate.showBackButton(false);
@@ -36,6 +36,7 @@ function LoginCtrl ($scope,
   $scope.showLoading = showLoading;
   $scope.stopLoading = stopLoading;
   $scope.login = login;
+  $scope.saveToCordova = saveToCordova;
   $scope.moveToHome = moveToHome;
   $scope.loginWithFacebook = loginWithFacebook;
   $scope.clearForm = clearForm;
@@ -54,6 +55,7 @@ function LoginCtrl ($scope,
           template : 'Error occurred while logging in.'
         });
       else
+        $scope.saveToCordova();
         $scope.moveToHome();
     });
   }
@@ -67,9 +69,18 @@ function LoginCtrl ($scope,
         $scope.alertFacebookError()
       }
       else {
+        $scope.saveToCordova();
         $scope.moveToHome();
       }
     });
+  }
+
+  function saveToCordova () {
+    if (typeof(cordova) !== "undefined") {
+      cordova.file["Meteor.loginToken"] = localStorage.getItem("Meteor.loginToken");
+      cordova.file["Meteor.loginTokenExpires"] = localStorage.getItem("Meteor.loginTokenExpires");
+      cordova.file["userId"] = localStorage.getItem("userId");
+    }
   }
 
   function moveToHome () {
@@ -79,7 +90,7 @@ function LoginCtrl ($scope,
 
   function alertFacebookError () {
     $ionicPopup.alert({
-      title : 'There was an error',
+      title : 'Something went wrong',
       templateUrl: "client/users/views/login_error.ng.html"
     });
   }

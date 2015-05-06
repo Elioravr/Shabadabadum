@@ -1,3 +1,7 @@
+Accounts.config({
+   loginExpirationInDays: null
+});
+
 ServiceConfiguration.configurations.remove({
     service: 'facebook'
 });

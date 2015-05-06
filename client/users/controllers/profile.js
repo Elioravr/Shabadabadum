@@ -38,6 +38,7 @@ function ProfileCtrl ($scope,
   });
 
   // Function Declaration
+  $scope.removeFromCordova = removeFromCordova;
   $scope.logout = logout;
 
   function logout () {
@@ -45,9 +46,18 @@ function ProfileCtrl ($scope,
       templateUrl: "client/users/views/loading.ng.html"
     });
     Meteor.logout(function () {
+      $scope.removeFromCordova();
       $ionicLoading.hide();
       $location.path("/login");
     });
   };
+
+  function removeFromCordova () {
+    if (cordova !== null) {
+      delete cordova.file["Meteor.loginToken"];
+      delete cordova.file["Meteor.loginTokenExpires"];
+      delete cordova.file["userId"];
+    }
+  }
 }
 
