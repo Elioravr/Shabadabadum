@@ -29,6 +29,7 @@ function ListsListCtrl ($meteor,
   $scope.toggleEdit = toggleEdit;
   $scope.goToNewList = goToNewList;
   $scope.remove = remove;
+  $scope.removeFromCordova = removeFromCordova;
   $scope.showLoading = showLoading;
   $scope.stopLoading = stopLoading;
 
@@ -45,11 +46,22 @@ function ListsListCtrl ($meteor,
   // $scope.lists = $meteor.collection(Lists).subscribe('lists');
   // $scope.editable = false;
 
-  $meteor.subscribe("lists").then(function(subscriptionHandle) {
-    $scope.lists = $meteor.collection(Lists).subscribe('lists', false);
-    $scope.stopLoading();
-    $scope.editable = false;
-  });
+  $meteor.subscribe("lists").then(
+    function(subscriptionHandle) {
+      $scope.lists = $meteor.collection(Lists).subscribe('lists', false);
+      $scope.stopLoading();
+      $scope.editable = false;
+    },
+    function () {
+      $ionicPopup.alert({
+        title: 'Something went wrong',
+        template: arguments
+      });
+      $scope.removeFromCordova();
+      $scope.stopLoading();
+      $state.go("login");
+    }
+  );
 
   function insert () {
     $scope.lists.save($scope.newList).then(
@@ -65,6 +77,14 @@ function ListsListCtrl ($meteor,
 
   function goToNewList () {
     $state.go("home.newListName");
+  }
+
+  function removeFromCordova () {
+    if (cordova === "undefined" || cordova === null) {
+      delete cordova.file["Meteor.loginToken"];
+      delete cordova.file["Meteor.loginTokenExpires"];
+      delete cordova.file["userId"];
+    }
   }
 
   function remove (list) {
