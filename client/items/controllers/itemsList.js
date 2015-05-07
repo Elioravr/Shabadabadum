@@ -45,7 +45,15 @@ function ItemsListCtrl ($scope,
 
   $scope.$on('$ionicView.beforeEnter', function () {
     $ionicNavBarDelegate.showBackButton(true);
-    $ionicScrollDelegate.scrollTop(true);
+    if (typeof($scope.scrollPosition) !== "undefined") {
+      $ionicScrollDelegate.scrollTo($scope.scrollPosition.left,
+                                    $scope.scrollPosition.top,
+                                    true);
+    }
+  });
+
+  $scope.$on('$ionicView.beforeLeave', function () {
+    $scope.scrollPosition = $ionicScrollDelegate.getScrollPosition();
   });
 
   function insert () {

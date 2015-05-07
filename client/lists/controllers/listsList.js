@@ -11,7 +11,8 @@ ListsListCtrl.$inject = [
   '$ionicHistory',
   '$state',
   '$ionicLoading',
-  '$ionicNavBarDelegate'
+  '$ionicNavBarDelegate',
+  '$ionicScrollDelegate'
 ];
 
 function ListsListCtrl ($meteor,
@@ -22,7 +23,8 @@ function ListsListCtrl ($meteor,
                         $ionicHistory,
                         $state,
                         $ionicLoading,
-                        $ionicNavBarDelegate) {
+                        $ionicNavBarDelegate,
+                        $ionicScrollDelegate) {
 
   // Functions declartion
   $scope.insert = insert;
@@ -30,6 +32,9 @@ function ListsListCtrl ($meteor,
   $scope.goToNewList = goToNewList;
   $scope.remove = remove;
   $scope.removeFromCordova = removeFromCordova;
+  $scope.itemsLeft = itemsLeft;
+  $scope.goToChat = goToChat;
+  $scope.getMomentedDate = getMomentedDate;
   $scope.showLoading = showLoading;
   $scope.stopLoading = stopLoading;
 
@@ -40,7 +45,17 @@ function ListsListCtrl ($meteor,
   $scope.showLoading();
 
   $scope.$on('$ionicView.beforeEnter', function () {
+    // $scope.$apply();
     $ionicNavBarDelegate.showBackButton(false);
+    if (typeof($scope.scrollPosition) !== "undefined") {
+      $ionicScrollDelegate.scrollTo($scope.scrollPosition.left,
+                                    $scope.scrollPosition.top,
+                                    true);
+    }
+  });
+
+  $scope.$on('$ionicView.beforeLeave', function () {
+    $scope.scrollPosition = $ionicScrollDelegate.getScrollPosition();
   });
 
   // $scope.lists = $meteor.collection(Lists).subscribe('lists');
@@ -53,10 +68,6 @@ function ListsListCtrl ($meteor,
       $scope.editable = false;
     },
     function () {
-      $ionicPopup.alert({
-        title: 'Something went wrong',
-        template: arguments
-      });
       $scope.removeFromCordova();
       $scope.stopLoading();
       $state.go("login");
@@ -103,6 +114,22 @@ function ListsListCtrl ($meteor,
       });
     }
   };
+
+  function itemsLeft (list) {
+    left = _.filter(list.items, function(item) {
+      return(item.isDone !== true);
+    });
+    return left.length;
+  }
+
+  function goToChat (list) {
+    // $state.go("home.newListName");
+    $state.go("home.list.chat", { listId: list._id.toString() });
+  }
+
+  function getMomentedDate (date) {
+    return moment(date).format("DD/MM HH:mm");
+  }
 
   function showLoading () {
     $ionicLoading.show({
