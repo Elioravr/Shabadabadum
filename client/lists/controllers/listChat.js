@@ -47,7 +47,7 @@ function ListChatCtrl ($meteor,
   });
 
   function getMomentedDate (date) {
-    return moment(date).format("DD/MM hh:mm");
+    return moment(date).format("DD/MM HH:mm");
   }
 
   function insertNewMessage () {
