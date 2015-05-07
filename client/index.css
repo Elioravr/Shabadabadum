@@ -35,6 +35,7 @@ html, body {
   width: calc(100% - 30px);
   text-overflow: ellipsis;
   overflow: hidden;
+  font-size: 20px;
 }
 
 .lists-view .empty-list .text {
@@ -118,7 +119,7 @@ html, body {
 .list-item-list {
   border: 1px solid rgb(56, 126, 245);
   border-top: 3px solid rgb(56, 126, 245);
-  height: 80px;
+  height: 158px;
   width: 92%;
   margin: 10px auto;
   background-image: url(notebook-2.jpg);
@@ -129,15 +130,120 @@ html, body {
   position: relative;
 }
 
-.list-item-list .users {
+.list-item-list .controls {
+  width: 100%;
+  background-color: #eee;
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  border-top: 1px solid #EBEAED;
+}
+
+.list-item-list .list-status {
+  font-size: 20px;
+  /*border: 1px solid #ccc;*/
+  /*border-right: 0px;*/
+  width: 33%;
+  height: 60px;
+  text-align: center;
+  display: inline-block;
+  background-color: white;
+  padding: 10px;
+  float: left;
+  font-family: Josefin Sans;
+  font-size: 26px;
+}
+
+.list-item-list .list-status .total,
+.list-item-list .list-status .left {
+  font-weight: 100;
+  margin-bottom: 3px;
+}
+
+.list-item-list .list-status .total {
+  color: #33cd5f;
+}
+
+.list-item-list .list-status .left {
+  color: #4F8EF7;
+}
+
+.list-item-list .list-status .total-text,
+.list-item-list .list-status .left-text {
+  color: #000;
+  font-size: 22px;
+}
+
+.list-item-list .controls .chat-button {
+  background-image: url(chat.svg);
+  background-repeat: no-repeat;
+  background-color: white;
+  /*box-shadow: 0px 2px 20px #888888;*/
+  display: inline-block;
+  background-size: 75px;
+  width: 33%;
+  height: 60px;
+  float: left;
+  border-left: 3px solid #eee;
+  border-right: 3px solid #eee;
+  background-position: 50% 5px;
+  /*width: 85px;*/
+  /*position: relative;*/
+  /*border-color: #28a54c;*/
+  /*z-index: 1;*/
+}
+/*
+.list-item-list .controls .chat-button .text {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  text-align: center;
+  font-weight: bold;
+  background-color: #33cd5f;
+  color: #fff;
+}*/
+
+/*.lists-view .item.active,
+.lists-view .item.activated,
+.lists-view .item-complex.active .item-content,
+.lists-view .item-complex.activated .item-content {
+  background-color: rgb(190, 190, 190);
+}*/
+
+.lists-view .item.active .list-item-list,
+.lists-view .item.activated .list-item-list,
+.lists-view .item-complex.active .item-content .list-item-list,
+.lists-view .item-complex.activated .item-content .list-item-list {
+  background-color: rgb(170, 200, 250);
+  background-image: none;
+  color: white;
+}
+
+.lists-view .item.active .list-item-list .sub-content,
+.lists-view .item.activated .list-item-list .sub-content,
+.lists-view .item-complex.active .item-content .list-item-list .sub-content,
+.lists-view .item-complex.activated .item-content .list-item-list .sub-content {
+  color: white;
+}
+
+.list-item-list .sub-content {
   color: #9D9D9D;
   font-size: 13px;
-  display: inline-block;
+  display: block;
   width: calc(100% - 30px);
   text-overflow: ellipsis;
   overflow: hidden;
-  margin-top: 3px;
   line-height: 20px
+}
+
+.list-item-list .users {
+  margin-top: 3px;
+}
+
+.list-item-list .updated-at {
+  margin-top: -1px;
 }
 
 .list-item-list .item-button {
