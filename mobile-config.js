@@ -8,10 +8,10 @@ App.icons({
   'iphone_3x': 'public/icon-1.png',
   'ipad': 'public/icon-1.png',
   'ipad_2x': 'public/icon-1.png',
-  'android_ldpi': 'public/icon-1.png',
-  'android_mdpi': 'public/icon-1.png',
-  'android_hdpi': 'public/icon-1.png',
-  'android_xhdpi': 'public/icon-1.png'
+  'android_ldpi': 'public/android-icon.png',
+  'android_mdpi': 'public/android-icon.png',
+  'android_hdpi': 'public/android-icon.png',
+  'android_xhdpi': 'public/android-icon.png'
 });
 
 App.launchScreens({
