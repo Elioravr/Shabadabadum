@@ -75,9 +75,9 @@ angular.module("familyst").config(['$urlRouterProvider', '$stateProvider', '$loc
       .state('home.list.details', {
         url: '/details',
         views: {
-          'home-tab': {
-            templateUrl: 'client/items/views/items_list.ng.html',
-            controller: 'ItemsListCtrl'
+          'home-tab@home': {
+            templateUrl: 'client/lists/views/list_details.ng.html',
+            controller: 'ListDetailsCtrl'
           }
         }
       })
