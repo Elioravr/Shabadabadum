@@ -1,4 +1,8 @@
-<ion-view view-title="My Lists" hide-nav-bar="false">
+<ion-view hide-nav-bar="false">
+  <!-- <ion-nav-title dir="auto">My Lists</ion-nav-title> -->
+  <ion-nav-title class="lists-view-title" dir="auto">
+    <img src="familyst-white.svg">
+  </ion-nav-title>
   <ion-nav-buttons side="primary">
     <button class="button button-clear"
             ng-click="toggleEdit()">
@@ -19,7 +23,7 @@
         <div class="text">Press <i class="icon ion-ios-plus-outline"></i> to create one.</div>
       </div>
       <ion-list>
-        <ion-item ng-repeat="list in lists | orderBy:'updatedAt':true" data-users="{{lists}}" ng-click="goToList(list)">
+        <ion-item ng-repeat="list in lists | orderBy:'updatedAt':true" ng-click="goToList(list)">
           <ion-delete-button class="ion-minus-circled" ng-click="remove(list); $event.stopPropagation();"></ion-delete-button>
           <div class="card list-item-list" ui-sref="home.list({listId: list._id.toString()})">
             <div class="list-title" dir="auto">
