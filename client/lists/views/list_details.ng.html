@@ -1,0 +1,38 @@
+<ion-view title="List Details">
+  <ion-content class="details">
+    <div class="card">
+      <div class="item item-divider">
+        Your list name
+      </div>
+      <div class="item item-text-wrap list-name">
+        <div class="list">
+          <div class="item item-input">
+            <input dir="auto" type="text" placeholder="List Name" ng-model="$parent.newListName">
+            <button class="button button-clear button-positive {{$parent.newListName === list.name ? 'disabled' : ''}}"
+                    ng-click="changeName()">
+              <i class="icon ion-android-send"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-divider">
+        Members
+      </div>
+      <div class="item item-text-wrap users-container">
+        <ion-list>
+          <ion-item ng-repeat="user in list.users">
+            <img ng-src="{{getUserPicture(user)}}">
+            <span class="username">{{user | displayName}}</span>
+          </ion-item>
+          <ion-item class="add-user-button">
+            <button class="button button-clear button-positive">
+              Add another user...
+            </button>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

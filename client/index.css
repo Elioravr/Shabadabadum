@@ -116,6 +116,11 @@ html, body {
 
 /*=========== new list design ===========*/
 
+.lists-view-title img {
+  width: 80px;
+  margin-top: 5px;
+}
+
 .list-item-list {
   border: 1px solid rgb(56, 126, 245);
   border-top: 3px solid rgb(56, 126, 245);
@@ -144,7 +149,7 @@ html, body {
   font-size: 20px;
   /*border: 1px solid #ccc;*/
   /*border-right: 0px;*/
-  width: 33%;
+  width: 33.33333333333%;
   height: 60px;
   text-align: center;
   display: inline-block;
@@ -182,7 +187,7 @@ html, body {
   /*box-shadow: 0px 2px 20px #888888;*/
   display: inline-block;
   background-size: 75px;
-  width: 33%;
+  width: 33.33333333333%;
   height: 60px;
   float: left;
   border-left: 3px solid #eee;
@@ -264,6 +269,14 @@ html, body {
 
 .new-list-form .users-list {
   padding: 0px;
+}
+
+.new-list-form .users-list img {
+  width: 36px;
+  height: 36px;
+  float: right;
+  border-radius: 53px;
+  margin-top: -5px;
 }
 
 .new-list-form .cart-picture {
@@ -604,4 +617,28 @@ html, body {
   font-weight: bold;
   background-color: #33cd5f;
   color: #fff;
+}
+
+/*=========== list details ===========*/
+
+.details .list-name {
+  padding: 0px;
+}
+
+.details .users-container {
+  padding: 0px;
+}
+
+.details .users-container img {
+  width: 36px;
+  height: 36px;
+  border-radius: 53px;
+  float: left;
+  margin-right: 10px;
+  margin-top: -8px;
+}
+
+.details .users-container .add-user-button {
+  padding: 0px;
+  padding-left: 12px;
 }

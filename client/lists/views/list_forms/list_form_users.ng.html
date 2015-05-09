@@ -1,4 +1,4 @@
-<ion-view view-title="{{listName}} Family">
+<ion-view view-title="users for {{listName}}">
   <ion-nav-buttons side="secondary">
     <button class="button button-clear" ng-click="createList()">
       Create
@@ -17,6 +17,7 @@
                       ng-repeat="user in users"
                       ng-show="'{{user | displayName}}'.toLowerCase().indexOf('{{searchText}}') !== {{-1}}"
                       ng-if="user._id !== $root.currentUser._id">
+          <img ng-if="user.profile.picture" src="{{user.profile.picture}}">
           {{user | displayName}}
         </ion-checkbox>
       </div>
