@@ -8,14 +8,15 @@
   <ion-content class="items-list">
     <div class="controls">
       <div class="list-status">
-        <div class="done">{{$parent.itemsLeft()}}</div>
-        <div class="total">items left</div>
+        <div class="done">{{list.items.length}}</div>
+        <div class="total">items</div>
       </div>
       <div class="chat-button" ui-sref="home.list.chat({listId: list._id.toString()})">
         <div class="text">Talk about it!</div>
       </div>
       <div class="list-status-1">
-        Something else
+        <div class="done">{{$parent.itemsLeft()}}</div>
+        <div class="total">left</div>
       </div>
     </div>
     <div class="list list-container">
