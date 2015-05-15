@@ -48,7 +48,7 @@ function ListChatCtrl ($meteor,
     $(".chat-container").css("top", "43px").css("bottom", "44px");
   });
 
-  $scope.$on('$ionicView.before1Leave', function () {
+  $scope.$on('$ionicView.beforeLeave', function () {
     $(".tab-nav").show()
   });
 
