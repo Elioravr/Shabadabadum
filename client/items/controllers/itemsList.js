@@ -31,12 +31,15 @@ function ItemsListCtrl ($scope,
   $scope.addItemMessage = addItemMessage;
   // $scope.itemsDone = itemsDone;
   $scope.itemsLeft = itemsLeft;
+  $scope.itemsForAutoComplete = itemsForAutoComplete;
   $scope.items = items;
   $scope.getItemCheckboxIcon = getItemCheckboxIcon;
   $scope.showLoading = showLoading;
   $scope.stopLoading = stopLoading;
 
   $scope.showLoading();
+  $scope.newItem = {};
+  $scope.newItem.title = '';
 
   $meteor.subscribe("list", $stateParams.listId).then(function(subscriptionHandle) {
     $scope.list = $meteor.object(Lists, $stateParams.listId, false);
@@ -147,6 +150,18 @@ function ItemsListCtrl ($scope,
       return(item.isDone !== true);
     });
     return left.length;
+  }
+
+  function itemsForAutoComplete () {
+    if (!$scope.list) {
+      return [];
+    }
+
+    var items = _.map($scope.list.items, function (item) {
+      return(item.title)
+    });
+
+    return _.uniq(items);
   }
 
   function getItemCheckboxIcon (item) {

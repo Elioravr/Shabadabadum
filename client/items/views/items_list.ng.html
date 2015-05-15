@@ -19,16 +19,27 @@
         <div class="total">left</div>
       </div>
     </div>
+    <form>
+      <div class="item item-input item-button-right">
+        <input class="list-item-input"
+               dir="auto"
+               ng-model="$parent.newItem.title"
+               type="text"
+               placeholder="Add New Item">
+        <button class="item-button insert-item-button button button-clear button-positive {{$parent.newItem.title === '' ? 'disabled' : ''}}" ng-click="insert()">
+          <!-- <i class="icon ion-ios-plus"></i> -->
+          Add
+        </button>
+      </div>
+    </form>
+    <ion-list class="list auto-complete" ng-show="$parent.newItem.title != ''">
+      <ion-item class="item"
+                ng-repeat="item in itemsForAutoComplete() | filter:$parent.newItem.title"
+                ng-click="$parent.newItem.title = item; insert()">
+        {{item}}
+      </ion-item>
+    </ion-list>
     <div class="list list-container">
-      <form>
-        <div class="item item-input item-button-right">
-          <input class="list-item-input" dir="auto" ng-model="$parent.newItem.title" type="text" placeholder="Add New Item">
-          <button class="item-button insert-item-button button" ng-click="insert()">
-            <!-- <i class="icon ion-ios-plus"></i> -->
-            Add
-          </button>
-        </div>
-      </form>
       <ion-toggle ng-model="shouldHideCompleted">
         Hide Completed?
       </ion-toggle>

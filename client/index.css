@@ -66,7 +66,7 @@ html, body {
   margin-top: 7px;
 }
 
-.list-container .insert-item-button {
+.insert-item-button {
   color: #4F8EF7;
 }
 
@@ -110,7 +110,7 @@ html, body {
   margin-bottom: 20px;
 }
 
-.list-container .list-item-input {
+.list-item-input {
   text-align: left;
 }
 
@@ -650,4 +650,14 @@ html, body {
 .details .users-container .add-user-button {
   padding: 0px;
   padding-left: 12px;
+}
+
+/*=========== list autocomplete ===========*/
+
+.items-list .auto-complete {
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  opacity: 0.9;
 }
