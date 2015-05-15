@@ -1,3 +1,9 @@
+App.info({
+  name: 'Familyst',
+  description: 'Simplify Shopping.',
+  version: '1.0.0'
+});
+
 App.accessRule("*://graph.facebook.com/*");
 App.accessRule("*://fbcdn-profile-a.akamaihd.net/*");
 App.accessRule("*://engine.kadira.io/simplentp/sync");
