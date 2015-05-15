@@ -41,9 +41,15 @@ function ListChatCtrl ($meteor,
     });
   });
 
-
-  $scope.$on('$ionicView.beforeEnter', function () {
+  $scope.$on('$ionicView.afterEnter', function () {
     $ionicNavBarDelegate.showBackButton(true);
+    $(".tab-nav").hide();
+    $(".bar-footer").css("bottom", 0);
+    $(".chat-container").css("top", "43px").css("bottom", "44px");
+  });
+
+  $scope.$on('$ionicView.before1Leave', function () {
+    $(".tab-nav").show()
   });
 
   function getMomentedDate (date) {

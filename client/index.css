@@ -526,7 +526,9 @@ html, body {
 }
 
 .chat-container {
-  background-color: #eee
+  background-color: #eee;
+  background-image: url(chat-background.png);
+  background-size: 200px;
 }
 
 .chat-container .bar-footer {
