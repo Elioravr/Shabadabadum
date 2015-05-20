@@ -53,7 +53,7 @@ function ProfileCtrl ($scope,
   };
 
   function removeFromCordova () {
-    if (cordova === "undefined" || cordova === null) {
+    if (typeof(cordova) !== "undefined") {
       delete cordova.file["Meteor.loginToken"];
       delete cordova.file["Meteor.loginTokenExpires"];
       delete cordova.file["userId"];
