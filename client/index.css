@@ -566,7 +566,7 @@ html, body {
   font-family: Josefin Sans;
 }
 
-.items-list .list-status-1 {
+.items-list .list-status-total {
   font-size: 20px;
   border: 1px solid #ccc;
   border-left: 0px;
@@ -593,7 +593,7 @@ html, body {
   margin-bottom: 3px;
 }
 
-.items-list .list-status-1 .done {
+.items-list .list-status-total .done {
   font-size: 35px;
   font-weight: 100;
   margin-top: 24px;
