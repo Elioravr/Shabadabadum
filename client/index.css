@@ -546,6 +546,11 @@ html, body {
   background-color: #eee;
 }
 
+.items-list-title button {
+  top: 6px;
+  font-size: 15px;
+}
+
 .items-list .controls {
   padding: 10px;
   text-align: center;
