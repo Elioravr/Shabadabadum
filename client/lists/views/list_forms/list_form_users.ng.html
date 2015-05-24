@@ -1,7 +1,7 @@
 <ion-view view-title="users for {{listName}}">
   <ion-nav-buttons side="secondary">
     <button class="button button-clear" ng-click="createList()">
-      Create
+      {{ isNew ? "Create" : "Update" }}
     </button>
   </ion-nav-buttons>
   <div class="bar bar-subheader item-input-inset">

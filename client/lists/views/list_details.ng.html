@@ -27,7 +27,7 @@
             <span class="username">{{user | displayName}}</span>
           </ion-item>
           <ion-item class="add-user-button">
-            <button class="button button-clear button-positive">
+            <button class="button button-clear button-positive" ui-sref="home.newListUsers({listName: list.name, listId: list._id, listUsers: list.users})">
               Add another user...
             </button>
           </ion-item>

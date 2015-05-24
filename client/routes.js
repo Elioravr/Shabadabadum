@@ -54,7 +54,7 @@ angular.module("familyst").config(['$urlRouterProvider', '$stateProvider', '$loc
       })
       // .state('home.lists.newList.users', {
       .state('home.newListUsers', {
-        params: { listName: "" },
+        params: { listName: "", listId: "", listUsers: [] },
         url: '/newListUsers',
         views: {
           'home-tab': {
