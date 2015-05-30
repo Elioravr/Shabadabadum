@@ -8,10 +8,11 @@ meteor-platform
 accounts-password
 urigo:angular
 accounts-facebook
-urigo:ionic
+urigo:ionic@1.0.0
 angularui:angular-ui-router
 aldeed:collection2
 reywood:publish-composite
 service-configuration
 mrt:moment
 meteorhacks:kadira
+raix:push
