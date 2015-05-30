@@ -549,6 +549,7 @@ html, body {
 .items-list-title button {
   top: 6px;
   font-size: 15px;
+  font-weight: bold;
 }
 
 .items-list .controls {
@@ -565,10 +566,8 @@ html, body {
   text-align: center;
   display: inline-block;
   background-color: white;
-  position: absolute;
-  top: 21px;
-  left: calc(50% - 145px);
   font-family: Josefin Sans;
+  vertical-align: middle;
 }
 
 .items-list .list-status-total {
@@ -580,15 +579,9 @@ html, body {
   text-align: center;
   display: inline-block;
   background-color: white;
-  position: absolute;
-  top: 21px;
   font-family: Josefin Sans;
+  vertical-align: middle;
 }
-
-/*.items-list .list-status .done,
-.items-list .list-status .total {
-  display: inline-block;
-}*/
 
 .items-list .list-status .done {
   font-size: 35px;
@@ -620,6 +613,9 @@ html, body {
   background-position: 5px 5px;
   border-color: #28a54c;
   z-index: 1;
+  vertical-align: middle;
+  margin-right: -3px;
+  margin-left: -3px;
 }
 
 .items-list .controls .chat-button .text {
