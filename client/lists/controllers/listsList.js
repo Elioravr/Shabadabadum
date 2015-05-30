@@ -38,14 +38,28 @@ function ListsListCtrl ($meteor,
   $scope.showLoading = showLoading;
   $scope.stopLoading = stopLoading;
 
-  if($rootScope.currentUser === "undefined" || $rootScope.currentUser === null) {
-      $state.go("login");
-  }
-
-  $scope.showLoading();
 
   $scope.$on('$ionicView.beforeEnter', function () {
-    // $scope.$apply();
+    if($rootScope.currentUser === "undefined" || $rootScope.currentUser === null) {
+        $state.go("login");
+    }
+
+    $scope.showLoading();
+
+    $meteor.subscribe("lists").then(
+      function(subscriptionHandle) {
+        $scope.subscriptionHandle = subscriptionHandle;
+        $scope.lists = $meteor.collection(Lists, false);
+        $scope.stopLoading();
+        $scope.editable = false;
+      },
+      function () {
+        $scope.removeFromCordova();
+        $scope.stopLoading();
+        $state.go("login");
+      }
+    );
+
     $ionicNavBarDelegate.showBackButton(false);
     if (typeof($scope.scrollPosition) !== "undefined") {
       $ionicScrollDelegate.scrollTo($scope.scrollPosition.left,
@@ -58,21 +72,9 @@ function ListsListCtrl ($meteor,
     $scope.scrollPosition = $ionicScrollDelegate.getScrollPosition();
   });
 
-  // $scope.lists = $meteor.collection(Lists).subscribe('lists');
-  // $scope.editable = false;
-
-  $meteor.subscribe("lists").then(
-    function(subscriptionHandle) {
-      $scope.lists = $meteor.collection(Lists).subscribe('lists', false);
-      $scope.stopLoading();
-      $scope.editable = false;
-    },
-    function () {
-      $scope.removeFromCordova();
-      $scope.stopLoading();
-      $state.go("login");
-    }
-  );
+  $scope.$on('$ionicView.afterLeave', function () {
+    $scope.subscriptionHandle.stop();
+  });
 
   function insert () {
     $scope.lists.save($scope.newList).then(
@@ -128,7 +130,11 @@ function ListsListCtrl ($meteor,
   }
 
   function getMomentedDate (date) {
-    return moment(date).format("DD/MM HH:mm");
+    // var dateString = "";
+    // dateString += moment(date).format("DD/MM HH:mm");
+    // dateString += " " + "(" + moment(date).fromNow() + ")";
+    // return dateString;
+    return moment(date).fromNow();
   }
 
   function showLoading () {

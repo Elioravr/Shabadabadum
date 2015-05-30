@@ -26,18 +26,20 @@ function ListChatCtrl ($meteor,
   $scope.showLoading = showLoading;
   $scope.stopLoading = stopLoading;
 
-  $scope.showLoading();
+  $scope.$on('$ionicView.beforeEnter', function () {
+    $scope.showLoading();
 
-  // $rootScope.hideTabs = true;
-  $scope.newMessage = '';
+    $scope.newMessage = '';
 
-  $meteor.subscribe("listForChat", $stateParams.listId).then(function(subscriptionHandle) {
-    $scope.list = $meteor.object(Lists, $stateParams.listId, false);
-    $ionicScrollDelegate.scrollBottom(true);
-    $scope.stopLoading();
-
-    $scope.$watch('list.messages', function(newValue, oldValue) {
+    $meteor.subscribe("listForChat", $stateParams.listId).then(function(subscriptionHandle) {
+      $scope.subscriptionHandle = subscriptionHandle;
+      $scope.list = $meteor.object(Lists, $stateParams.listId, false);
       $ionicScrollDelegate.scrollBottom(true);
+      $scope.stopLoading();
+
+      $scope.$watch('list.messages', function(newValue, oldValue) {
+        $ionicScrollDelegate.scrollBottom(true);
+      });
     });
   });
 
@@ -50,6 +52,10 @@ function ListChatCtrl ($meteor,
 
   $scope.$on('$ionicView.beforeLeave', function () {
     $(".tab-nav").show()
+  });
+
+  $scope.$on('$ionicView.afterLeave', function () {
+    $scope.subscriptionHandle.stop();
   });
 
   function getMomentedDate (date) {

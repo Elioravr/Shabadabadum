@@ -29,7 +29,6 @@ function ItemsListCtrl ($scope,
   $scope.markAsDone = markAsDone;
   $scope.remove = remove;
   $scope.addItemMessage = addItemMessage;
-  // $scope.itemsDone = itemsDone;
   $scope.itemsLeft = itemsLeft;
   $scope.itemsForAutoComplete = itemsForAutoComplete;
   $scope.items = items;
@@ -37,16 +36,18 @@ function ItemsListCtrl ($scope,
   $scope.showLoading = showLoading;
   $scope.stopLoading = stopLoading;
 
-  $scope.showLoading();
-  $scope.newItem = {};
-  $scope.newItem.title = '';
-
-  $meteor.subscribe("list", $stateParams.listId).then(function(subscriptionHandle) {
-    $scope.list = $meteor.object(Lists, $stateParams.listId, false);
-    $scope.stopLoading();
-  });
-
   $scope.$on('$ionicView.beforeEnter', function () {
+    $scope.showLoading();
+    $scope.newItem = {};
+    $scope.newItem.title = '';
+
+    $meteor.subscribe("list", $stateParams.listId).then(function(subscriptionHandle) {
+      $scope.subscriptionHandle = subscriptionHandle;
+
+      $scope.list = $meteor.object(Lists, $stateParams.listId, false);
+      $scope.stopLoading();
+    });
+
     $ionicNavBarDelegate.showBackButton(true);
     if (typeof($scope.scrollPosition) !== "undefined") {
       $ionicScrollDelegate.scrollTo($scope.scrollPosition.left,
@@ -57,6 +58,10 @@ function ItemsListCtrl ($scope,
 
   $scope.$on('$ionicView.beforeLeave', function () {
     $scope.scrollPosition = $ionicScrollDelegate.getScrollPosition();
+  });
+
+  $scope.$on('$ionicView.afterLeave', function () {
+    $scope.subscriptionHandle.stop();
   });
 
   function insert () {
@@ -105,6 +110,7 @@ function ItemsListCtrl ($scope,
     item.isDone = !item.isDone;
     $scope.list.save().then(
       function () {
+
       }
     );
   }
@@ -130,17 +136,6 @@ function ItemsListCtrl ($scope,
     return items;
   }
 
-  // function itemsDone () {
-  //   if (!$scope.list) {
-  //     return 0;
-  //   }
-
-  //   left = _.filter($scope.list.items, function(item) {
-  //     return(item.isDone === true);
-  //   });
-  //   return left.length;
-  // }
-
   function itemsLeft () {
     if (!$scope.list) {
       return 0;
@@ -165,11 +160,13 @@ function ItemsListCtrl ($scope,
   }
 
   function getItemCheckboxIcon (item) {
-    if (item.isDone === true) {
-      return 'ion-android-checkbox-outline'
-    }
-    else {
-      return 'ion-android-checkbox-outline-blank'
+    if (item) {
+      if (item.isDone === true) {
+        return 'ion-android-checkbox-outline'
+      }
+      else {
+        return 'ion-android-checkbox-outline-blank'
+      }
     }
   }
 
