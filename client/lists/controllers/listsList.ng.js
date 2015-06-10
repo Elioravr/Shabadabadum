@@ -2,19 +2,6 @@ angular
   .module("familyst")
   .controller("ListsListCtrl", ListsListCtrl);
 
-ListsListCtrl.$inject = [
-  '$meteor',
-  '$scope',
-  '$rootScope',
-  '$stateParams',
-  '$ionicPopup',
-  '$ionicHistory',
-  '$state',
-  '$ionicLoading',
-  '$ionicNavBarDelegate',
-  '$ionicScrollDelegate'
-];
-
 function ListsListCtrl ($meteor,
                         $scope,
                         $rootScope,
@@ -38,27 +25,13 @@ function ListsListCtrl ($meteor,
   $scope.showLoading = showLoading;
   $scope.stopLoading = stopLoading;
 
+  $scope.showLoading();
 
   $scope.$on('$ionicView.beforeEnter', function () {
-    if($rootScope.currentUser === "undefined" || $rootScope.currentUser === null) {
-        $state.go("login");
-    }
+    // if($rootScope.currentUser === "undefined" || $rootScope.currentUser === null) {
+    //     $state.go("login");
+    // }
 
-    $scope.showLoading();
-
-    $meteor.subscribe("lists").then(
-      function(subscriptionHandle) {
-        $scope.subscriptionHandle = subscriptionHandle;
-        $scope.lists = $meteor.collection(Lists, false);
-        $scope.stopLoading();
-        $scope.editable = false;
-      },
-      function () {
-        $scope.removeFromCordova();
-        $scope.stopLoading();
-        $state.go("login");
-      }
-    );
 
     $ionicNavBarDelegate.showBackButton(false);
     if (typeof($scope.scrollPosition) !== "undefined") {
@@ -68,13 +41,33 @@ function ListsListCtrl ($meteor,
     }
   });
 
+  $scope.$on('$ionicView.afterEnter', function () {
+
+    $meteor.subscribe("lists").then(
+      function(subscriptionHandle) {
+        $scope.subscriptionHandle = subscriptionHandle;
+        $scope.lists = $meteor.collection(function () {
+          return findListsForHomeClient($rootScope.currentUser._id);
+        });
+        console.log($scope.lists);
+        $scope.stopLoading();
+        $scope.editable = false;
+      },
+      function () {
+        $scope.removeFromCordova();
+        $scope.stopLoading();
+        $state.go("login");
+      }
+    );
+  });
+
   $scope.$on('$ionicView.beforeLeave', function () {
     $scope.scrollPosition = $ionicScrollDelegate.getScrollPosition();
   });
 
-  $scope.$on('$ionicView.afterLeave', function () {
-    $scope.subscriptionHandle.stop();
-  });
+  // $scope.$on('$ionicView.afterLeave', function () {
+  //   $scope.subscriptionHandle.stop();
+  // });
 
   function insert () {
     $scope.lists.save($scope.newList).then(

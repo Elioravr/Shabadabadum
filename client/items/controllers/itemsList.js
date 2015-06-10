@@ -28,7 +28,7 @@ function ItemsListCtrl ($scope,
   $scope.insert = insert;
   $scope.markAsDone = markAsDone;
   $scope.remove = remove;
-  $scope.addItemMessage = addItemMessage;
+  $scope.getItemMessage = getItemMessage;
   $scope.itemsLeft = itemsLeft;
   $scope.itemsForAutoComplete = itemsForAutoComplete;
   $scope.items = items;
@@ -36,10 +36,11 @@ function ItemsListCtrl ($scope,
   $scope.showLoading = showLoading;
   $scope.stopLoading = stopLoading;
 
+  $scope.showLoading();
+  $scope.newItem = {};
+  $scope.newItem.title = '';
+
   $scope.$on('$ionicView.beforeEnter', function () {
-    $scope.showLoading();
-    $scope.newItem = {};
-    $scope.newItem.title = '';
 
     $meteor.subscribe("list", $stateParams.listId).then(function(subscriptionHandle) {
       $scope.subscriptionHandle = subscriptionHandle;
@@ -47,6 +48,8 @@ function ItemsListCtrl ($scope,
       $scope.list = $meteor.object(Lists, $stateParams.listId, false);
       $scope.stopLoading();
     });
+
+    Meteor.subscribe('list', $stateParams.listId)
 
     $ionicNavBarDelegate.showBackButton(true);
     if (typeof($scope.scrollPosition) !== "undefined") {
@@ -73,10 +76,9 @@ function ItemsListCtrl ($scope,
     };
     $scope.newItem.title = '';
 
-    $scope.list.items.push(newItem);
-    $scope.list.save().then(
+    $meteor.call('insertNewItem', $scope.list._id, newItem, getItemMessage(newItem.title, 'insert')).then(
       function () {
-        $scope.addItemMessage(newItem.title, 'insert');
+        console.log("success");
       },
       function () {
         console.log(arguments);
@@ -84,7 +86,7 @@ function ItemsListCtrl ($scope,
     );
   }
 
-  function addItemMessage (title, action) {
+  function getItemMessage (title, action) {
     username = $filter('displayName')($rootScope.currentUser);
     if (action === 'insert') {
       content = username + " has added \"" + title + "\" to the list.";
@@ -95,21 +97,19 @@ function ItemsListCtrl ($scope,
       content:   content,
       createdAt: new Date()
     };
-    $scope.list.messages.push(newMessage);
-    $scope.list.save().then(
-      function () {
-        console.log(arguments);
-      },
-      function () {
-        console.log(arguments);
-      }
-    );
+
+    return newMessage;
   }
 
   function markAsDone (item) {
     item.isDone = !item.isDone;
-    $scope.list.save().then(
-      function () {
+    console.log('isDone:', item.isDone);
+    console.log('createdAt:', item.createdAt);
+    $meteor.call('markAsDone', $scope.list._id, item.createdAt, item.isDone).then(
+      function (data) {
+
+      },
+      function(err){
 
       }
     );
@@ -120,7 +120,7 @@ function ItemsListCtrl ($scope,
     $scope.list.items.splice(index, 1);
     $scope.list.save().then(
       function () {
-        $scope.addItemMessage(item.title, 'remove');
+        $scope.getItemMessage(item.title, 'remove');
       }
     );
   }

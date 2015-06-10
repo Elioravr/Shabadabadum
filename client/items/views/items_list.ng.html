@@ -53,10 +53,10 @@
            ng-click="markAsDone(item)">
         <div class="item-checkbox">
           <i class="{{getItemCheckboxIcon(item)}}"></i>
-          <div dir="auto" class="item-text" ng-class="{done: item.isDone}">{{::item.title}}</div>
-          <div ng-if="item.profile" dir="auto" class="item-user" ng-class="{done: item.isDone}">{{::item | displayName}}</div>
+          <div dir="auto" class="item-text" ng-class="{done: item.isDone}">{{item.title}}</div>
+          <div ng-if="item.profile" dir="auto" class="item-user" ng-class="{done: item.isDone}">{{item | displayName}}</div>
         </div>
-        <button class="item-button remove-item-button button" ng-click="remove(item)">
+        <button class="item-button remove-item-button button" ng-click="remove(item); $event.stopPropagation();">
           <i class="icon ion-android-close"></i>
         </button>
       </div>

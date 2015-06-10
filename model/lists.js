@@ -1,3 +1,4 @@
+SimpleSchema.debug = true;
 Lists = new Mongo.Collection("lists");
 
 var Schemas = {};
@@ -33,6 +34,14 @@ Schemas.List = new SimpleSchema({
   users: {
     type: [Object],
     optional: false
+  },
+  itemsCount: {
+    type: Number,
+    optional: true
+  },
+  itemsLeft: {
+    type: Number,
+    optional: true
   },
   items: {
     type: [Object],

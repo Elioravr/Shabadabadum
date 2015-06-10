@@ -70,10 +70,9 @@ function ListChatCtrl ($meteor,
       createdAt: new Date()
     };
 
-    $scope.list.messages.push(newMessage);
-    $scope.newMessage = '';
-    $scope.list.save().then(
+    $meteor.call('insertNewMessage', $scope.list._id, newMessage).then(
       function () {
+        $scope.newMessage = '';
         $ionicScrollDelegate.scrollBottom(true);
       },
       function () {

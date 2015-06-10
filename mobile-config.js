@@ -6,6 +6,7 @@ App.info({
 
 App.accessRule("*://graph.facebook.com/*");
 App.accessRule("*://fbcdn-profile-a.akamaihd.net/*");
+App.accessRule("*://m.facebook.com/*");
 App.accessRule("*://engine.kadira.io/simplentp/sync");
 
 App.icons({

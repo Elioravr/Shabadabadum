@@ -17,7 +17,9 @@ function LoginCtrl ($scope,
                     $ionicNavBarDelegate) {
 
   $rootScope.$watch("currentUser", function() {
-    $state.go("home.lists");
+    if ($rootScope.currentUser) {
+      $state.go("home.lists");
+    }
   });
 
   $scope.$on('$ionicView.beforeEnter', function () {
@@ -49,14 +51,16 @@ function LoginCtrl ($scope,
     $scope.showLoading();
     Meteor.loginWithPassword($scope.emailAddress.toLowerCase(), $scope.password, function(err) {
       $scope.stopLoading();
-      if (err)
+      if (err) {
         $ionicPopup.alert({
           title : 'Error Occurred',
           template : 'Error occurred while logging in.'
         });
-      else
+      }
+      else {
         $scope.saveToCordova();
         $scope.moveToHome();
+      }
     });
   }
 
