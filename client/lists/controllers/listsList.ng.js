@@ -32,17 +32,6 @@ function ListsListCtrl ($meteor,
     //     $state.go("login");
     // }
 
-
-    $ionicNavBarDelegate.showBackButton(false);
-    if (typeof($scope.scrollPosition) !== "undefined") {
-      $ionicScrollDelegate.scrollTo($scope.scrollPosition.left,
-                                    $scope.scrollPosition.top,
-                                    true);
-    }
-  });
-
-  $scope.$on('$ionicView.afterEnter', function () {
-
     $meteor.subscribe("lists").then(
       function(subscriptionHandle) {
         $scope.subscriptionHandle = subscriptionHandle;
@@ -59,6 +48,17 @@ function ListsListCtrl ($meteor,
         $state.go("login");
       }
     );
+
+    $ionicNavBarDelegate.showBackButton(false);
+    if (typeof($scope.scrollPosition) !== "undefined") {
+      $ionicScrollDelegate.scrollTo($scope.scrollPosition.left,
+                                    $scope.scrollPosition.top,
+                                    true);
+    }
+  });
+
+  $scope.$on('$ionicView.afterEnter', function () {
+
   });
 
   $scope.$on('$ionicView.beforeLeave', function () {
