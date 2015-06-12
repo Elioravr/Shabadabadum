@@ -662,3 +662,50 @@ html, body {
   z-index: 100;
   opacity: 0.9;
 }
+
+/*=========== application update ===========*/
+
+.update-prompt {
+  background-color: rgba(125, 234, 241, .9);
+  text-align: center;
+  left: 10%;
+  top: 15%;
+  padding: 18px;
+  position: absolute;
+  text-align: center;
+  width: 80%;
+  height: 70%;
+  border-radius: 10px;
+  display: none;
+  z-index: 1000;
+}
+
+.update-prompt img {
+  width: 100%;
+  display: block;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.update-prompt .message {
+  font-size: 120%;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+@-webkit-keyframes familyst-loading {
+  from{
+      -webkit-transform: rotate(0deg);
+  }
+  to{
+      -webkit-transform: rotate(360deg);
+  }
+}
+
+.update-prompt i {
+  -webkit-animation: familyst-loading 2s linear infinite;
+  font-size: 80px;
+  position: absolute;
+  bottom: 10px;
+  left: calc(50% - 40px);
+}

@@ -4,6 +4,16 @@ angular.module('familyst', [
   'ionic']); //,
   // 'ngCordova.plugins.datePicker']);
 
+AppUpdate.reload.preventReload();
+
+Tracker.autorun(function () {
+  if (AppUpdate.reload.hasNewUpdate()) {
+    $(".update-prompt").fadeIn(function () {
+      AppUpdate.reload.manualReload();
+    });
+  }
+});
+
 function onReady() {
   angular.bootstrap(document, ['familyst']);
 }
