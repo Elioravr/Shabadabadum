@@ -2,6 +2,7 @@
   <ion-content class="chat-container">
     <div class="list list-container">
       <div ng-repeat="message in list.messages" class="message-container" ng-class="{ 'my-message': message.userId === $root.currentUser._id, 'alert-message': !message.userId }">
+        <img ng-if="message.profile.picture" class="user-picture" src="{{message.profile.picture}}">
         <div class="chat-message">
           <div ng-if="message.userId !== $root.currentUser._id" class="user">{{message | displayName}}</div>
           <div class="content" dir="auto">

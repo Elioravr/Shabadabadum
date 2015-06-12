@@ -111,6 +111,7 @@ html, body {
 }
 
 .list-item-input {
+  font-size: 18px;
   text-align: left;
 }
 
@@ -457,6 +458,7 @@ html, body {
   clear: both;
   background-color: white;
   font-size: 110%;
+  display: inline-block;
 }
 
 /*.chat-message,
@@ -480,6 +482,12 @@ html, body {
   background-color: rgb(255, 255, 212);
   margin-right: 5px;
   display: inline-block;
+}
+
+.message-container img.user-picture {
+  border-radius: 30px;
+  width: 30px;
+  height: 30px;
 }
 
 /* content for users messages */
@@ -526,9 +534,10 @@ html, body {
 }
 
 .chat-container {
-  background-color: #eee;
-  background-image: url(chat-background.png);
-  background-size: 200px;
+  /*background-color: #eee;*/
+  background: -webkit-linear-gradient(left top, rgb(0, 226, 255) , rgb(205, 205, 205));
+  /*background-image: url(chat-background.png);*/
+  /*background-size: 200px;*/
 }
 
 .chat-container .bar-footer {
