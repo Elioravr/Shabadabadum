@@ -116,11 +116,9 @@ function ItemsListCtrl ($scope,
   }
 
   function remove (item) {
-    var index = $scope.list.items.indexOf(item);
-    $scope.list.items.splice(index, 1);
-    $scope.list.save().then(
+    $meteor.call('removeItemFromList', $scope.list._id, item.createdAt, getItemMessage(item.title, 'remove')).then(
       function () {
-        $scope.getItemMessage(item.title, 'remove');
+        console.log("removed");
       }
     );
   }

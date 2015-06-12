@@ -9,6 +9,7 @@ function ListsListCtrl ($meteor,
                         $ionicPopup,
                         $ionicHistory,
                         $state,
+                        $filter,
                         $ionicLoading,
                         $ionicNavBarDelegate,
                         $ionicScrollDelegate) {
@@ -26,6 +27,7 @@ function ListsListCtrl ($meteor,
   $scope.stopLoading = stopLoading;
 
   $scope.showLoading();
+  $scope.isSubscribed = false;
 
   $scope.$on('$ionicView.beforeEnter', function () {
     // if($rootScope.currentUser === "undefined" || $rootScope.currentUser === null) {
@@ -40,6 +42,7 @@ function ListsListCtrl ($meteor,
         });
         console.log($scope.lists);
         $scope.stopLoading();
+        $scope.isSubscribed = true;
         $scope.editable = false;
       },
       function () {
@@ -93,18 +96,20 @@ function ListsListCtrl ($meteor,
     }
   }
 
-  function remove (list) {
+  function remove (list, event) {
     if ($scope.editable) {
-
+      event.stopPropagation();
       var confirmPopup = $ionicPopup.confirm({
         title: 'Quitting from a List',
         template: 'Are you sure you want to quit from that list?'
       });
       confirmPopup.then(function(res) {
         if (res) {
-          var index = list.users.indexOf($rootScope.currentUser._id);
-          list.users.splice(index, 1);
-          $scope.lists.save();
+          username = $filter('displayName')($rootScope.currentUser);
+          $meteor.call('removeUserFromList', list._id, $rootScope.currentUser._id, username);
+          // var index = list.users.indexOf($rootScope.currentUser._id);
+          // list.users.splice(index, 1);
+          // $scope.lists.save();
         }
       });
     }

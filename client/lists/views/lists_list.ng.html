@@ -17,7 +17,7 @@
 
   <ion-content class="lists-view">
     <div class="list list-container">
-      <div class="empty-list" ng-show="lists.length === 0">
+      <div class="empty-list" ng-show="lists.length === 0 && isSubscribed">
         <div class="cart-picture"></div>
         <div class="text">You have no lists yet.</div>
         <div class="text">Press <i class="icon ion-ios-plus-outline"></i> to create one.</div>
@@ -41,11 +41,11 @@
             <span class="sub-content updated-at">
               Last activity: {{getMomentedDate(list.updatedAt)}}
             </span>
-            <button class="item-button button">
+            <button class="item-button button"
+                    ng-click="remove(list, $event);">
               <i class="icon ion-ios-arrow-right" ng-hide="editable"></i>
               <i class="icon ion-minus-circled"
-                 ng-show="editable"
-                 ng-click="$event.stopPropagation(); remove(list);"></i>
+                 ng-show="editable"></i>
             </button>
             <div class="controls">
               <div class="list-status">

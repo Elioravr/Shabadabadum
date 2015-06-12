@@ -36,9 +36,9 @@ Meteor.publish('lists', function () {
   })
 });
 
-Meteor.publish("list", findList);
+Meteor.publish('list', findList);
 
-Meteor.publish("listForChat", findListForChat);
+Meteor.publish('listForChat', findListForChat);
 
 Meteor.methods({
   insertNewItem: function (listId, item, message) {
@@ -50,12 +50,26 @@ Meteor.methods({
                  { $push: { 'messages': message } });
   },
   markAsDone: function (listId, createdAt, isDone) {
-    Lists.update({ _id : listId , "items.createdAt" : createdAt },
-                 { $set : { "items.$.isDone" : isDone } });
+    Lists.update({ _id : listId , 'items.createdAt' : createdAt },
+                 { $set : { 'items.$.isDone' : isDone } });
   },
-  // removeUserFromList: function (listId, userId) {
-  //   Lists.update({ _id: listId }, )
-  // }
+  removeItemFromList: function (listId, createdAt, message) {
+    Lists.update(listId,
+                 { $pull: { 'items': { createdAt: createdAt } } });
+    Lists.update(listId,
+                 { $push: { 'messages': message } });
+  },
+  removeUserFromList: function (listId, userId, userFullName) {
+    var newMessage = {
+      content:   userFullName + ' has left the list.',
+      createdAt: new Date()
+    };
+
+    Lists.update(listId,
+                 { $pull: { 'users': { _id: userId } } });
+    Lists.update(listId,
+                 { $push: { 'messages': newMessage } });
+  }
 });
 
 

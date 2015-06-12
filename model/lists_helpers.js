@@ -5,6 +5,7 @@ findListsForHomeServer = function (userId) {
                              'users._id': 1,
                              'users.profile': 1,
                              'items': 1,
+                             'messages': 1,
                              'updatedAt': 1
                          }
 
